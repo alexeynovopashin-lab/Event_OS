@@ -3,7 +3,9 @@
 
 Структура:
 00_North_Star.md
+
 01_Vision.md
+
 02_Product_Strategy.md
 03_Principles.md
 10_Architecture.md
