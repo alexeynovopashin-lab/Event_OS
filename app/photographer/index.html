@@ -15,7 +15,7 @@
 <main id="app"></main>
 
 <script type="module">
-import { seedDemoProject, seedDemoChange } from "../core/seed.js";
+import { seedDemoProject, seedDemoChange, seedDemoConsentRequest } from "../core/seed.js";
 import { computeContext, acknowledge } from "../core/context.js";
 
 const ROLE = "photographer";
@@ -24,6 +24,8 @@ const USER_ID = "person-photographer";
 const graph = seedDemoProject();
 // демо: один раз показываем, как Change из-за дождя долетает до фотографа
 if (graph.changes.length === 0) seedDemoChange(graph);
+// демо: организатор добавил съёмку напрямую — ждёт подтверждения фотографа
+seedDemoConsentRequest(graph);
 
 render();
 
@@ -32,8 +34,8 @@ function render() {
   const app = document.getElementById("app");
   app.innerHTML = "";
 
-  if (ctx.changed.length > 0) {
-    app.appendChild(changeCard(ctx.changed[0]));
+  for (const change of ctx.changed) {
+    app.appendChild(changeCard(change));
   }
 
   app.appendChild(sceneCard("Сейчас", ctx.where, "now"));
@@ -61,6 +63,10 @@ function sceneCard(label, scene, extraClass) {
 }
 
 function changeCard(change) {
+  if (change.status === "Pending") return consentCard(change);
+  if (change.status === "Declined") return declinedCard(change);
+  if (change.before === null) return addedCard(change);
+
   const el = document.createElement("div");
   el.className = "card changed";
   el.innerHTML = `
@@ -74,6 +80,65 @@ function changeCard(change) {
   btn.textContent = "Понял";
   btn.onclick = () => { acknowledge(graph, change.id, USER_ID); render(); };
   el.appendChild(btn);
+  return el;
+}
+
+// Предложение отклонено — узел так и не появился в графе. Квитируем и всё.
+function declinedCard(change) {
+  const el = document.createElement("div");
+  el.className = "card";
+  el.innerHTML = `
+    <div class="label">Отклонено</div>
+    <div class="title">${change.after.title}</div>
+    <div class="meta">Организатор предлагал добавить — вы отклонили</div>
+  `;
+  const btn = document.createElement("button");
+  btn.className = "ack";
+  btn.textContent = "Понял";
+  btn.onclick = () => { acknowledge(graph, change.id, USER_ID); render(); };
+  el.appendChild(btn);
+  return el;
+}
+
+// Предложение уже подтверждено — узел реален, before ещё нет (это было
+// создание, не правка). Просто квитируем, как обычное "Изменилось".
+function addedCard(change) {
+  const el = document.createElement("div");
+  el.className = "card changed";
+  el.innerHTML = `
+    <div class="label">Добавлено в расписание</div>
+    <div class="title">${change.after.title}</div>
+    <div class="meta">${change.after.location} · ${formatTime(change.after.startsAt)}</div>
+  `;
+  const btn = document.createElement("button");
+  btn.className = "ack";
+  btn.textContent = "Понял";
+  btn.onclick = () => { acknowledge(graph, change.id, USER_ID); render(); };
+  el.appendChild(btn);
+  return el;
+}
+
+// Организатор предложил запись в календарь — вступает в силу только после
+// подтверждения фотографа (BRIDGE_LIGHT_PLAN.md §3/§9).
+function consentCard(change) {
+  const el = document.createElement("div");
+  el.className = "card changed";
+  el.innerHTML = `
+    <div class="label">Организатор предлагает добавить</div>
+    <div class="title">${change.after.title}</div>
+    <div class="meta">${change.after.location} · ${formatTime(change.after.startsAt)}</div>
+    <div class="meta">Причина: ${change.reason ?? "не указана"}</div>
+  `;
+  const confirmBtn = document.createElement("button");
+  confirmBtn.className = "ack";
+  confirmBtn.textContent = "Подтвердить";
+  confirmBtn.onclick = () => { graph.confirmChange(change.id, USER_ID); render(); };
+  const declineBtn = document.createElement("button");
+  declineBtn.className = "ack decline";
+  declineBtn.textContent = "Отклонить";
+  declineBtn.onclick = () => { graph.declineChange(change.id, USER_ID); render(); };
+  el.appendChild(confirmBtn);
+  el.appendChild(declineBtn);
   return el;
 }
 

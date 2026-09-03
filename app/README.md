@@ -38,6 +38,16 @@ npx serve "Event OS/app"
 видит — клиент не входит в `Affected Roles` этого изменения (пример из
 `54_Changes.md §34`, "Change и клиент").
 
+**Согласие адресата перед записью (`BRIDGE_LIGHT_PLAN.md §3/§9`, решено
+3 сентября 2026).** Открой `photographer/` — вторая карточка: организатор
+предложил добавить съёмку деталей напрямую в календарь фотографа. Сцена
+`scene-detail-shoot` при этом **не существует в графе** — не появится ни в
+`nodesByType("Scene")`, ни у кого другого — пока фотограф не нажмёт
+«Подтвердить» (`Graph.confirmChange`) или «Отклонить» (`Graph.declineChange`).
+Механизм — `Graph.proposeNode()` для новой записи и `meta.consentFrom` в
+`Graph.updateNode()` для правки существующей: обе создают `Change` со
+`status: "Pending"` и не трогают сам узел до ответа адресата.
+
 ## organizer/ — статус
 
 `organizer/index.html` сейчас не полноценное приложение, а bridge-страница:

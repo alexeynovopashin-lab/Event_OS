@@ -57,11 +57,17 @@ main {
 .progress { color: var(--muted); font-size: 13px; }
 button.ack {
   margin-top: 10px;
+  margin-right: 8px;
   background: var(--critical);
   color: #fff;
   border: none;
   border-radius: 10px;
   padding: 8px 14px;
   font-size: 14px;
+}
+button.ack.decline {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--muted);
 }
 .empty { color: var(--muted); text-align: center; padding: 40px 0; }

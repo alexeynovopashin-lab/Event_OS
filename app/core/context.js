@@ -16,8 +16,17 @@ export function computeContext(graph, { role, userId, now = new Date() }) {
   const next = scenes.find((s) => new Date(s.startsAt) > now);
   const past = scenes.filter((s) => new Date(s.endsAt) < now);
 
+  // A Pending change proposes a node that doesn't exist in the graph yet
+  // (see Graph.proposeNode), so it has no edges for affectedRoles() to walk —
+  // it reaches its addressee through consentFrom instead.
   const recentChanges = graph.changes
-    .filter((c) => graph.affectedRoles(c).includes(role) || c.objectId === current?.id || c.objectId === next?.id)
+    .filter(
+      (c) =>
+        graph.affectedRoles(c).includes(role) ||
+        c.objectId === current?.id ||
+        c.objectId === next?.id ||
+        c.consentFrom === userId
+    )
     .filter((c) => !c.acknowledgedBy?.includes(userId))
     .slice(0, 5);
 

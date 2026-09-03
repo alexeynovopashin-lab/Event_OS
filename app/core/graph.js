@@ -26,12 +26,29 @@ export class Graph {
     return this.nodes.get(id) ?? null;
   }
 
+  // meta.consentFrom marks a write made by someone other than the data's
+  // owner (BRIDGE_LIGHT_PLAN.md §3/§9): the node is not mutated yet, the
+  // proposed state waits in the Change as "Pending" until that person calls
+  // confirmChange().
   updateNode(id, patch, meta = {}) {
     const before = this.getNode(id);
     if (!before) throw new Error(`Unknown node: ${id}`);
     const after = { ...before, ...patch };
-    this.nodes.set(id, after);
 
+    if (meta.consentFrom) {
+      const change = this._recordChange({
+        objectType: before.type,
+        objectId: id,
+        before,
+        after,
+        status: "Pending",
+        ...meta,
+      });
+      this._save();
+      return { node: before, change };
+    }
+
+    this.nodes.set(id, after);
     const change = this._recordChange({
       objectType: before.type,
       objectId: id,
@@ -42,6 +59,62 @@ export class Graph {
 
     this._save();
     return { node: after, change };
+  }
+
+  // Propose a brand-new node (e.g. a booking organizer adds to someone
+  // else's calendar): it does not exist in the graph — invisible to
+  // nodesByType(), edgesFrom/To() — until confirmChange() applies it.
+  // Always requires meta.consentFrom; there is no owner to skip consent for.
+  proposeNode(node, edges = [], meta = {}) {
+    if (!node.id) throw new Error("Node requires id");
+    if (this.nodes.has(node.id)) throw new Error(`Node already exists: ${node.id}`);
+    if (!meta.consentFrom) throw new Error("proposeNode requires meta.consentFrom");
+
+    const change = this._recordChange({
+      objectType: node.type,
+      objectId: node.id,
+      before: null,
+      after: node,
+      pendingEdges: edges,
+      status: "Pending",
+      ...meta,
+    });
+    this._save();
+    return change;
+  }
+
+  // --- Responding to a pending Change (BRIDGE_LIGHT_PLAN.md §3/§9) -----
+
+  confirmChange(changeId, userId) {
+    const change = this._requirePending(changeId, userId);
+    this.nodes.set(change.objectId, change.after);
+    if (change.before === null) {
+      for (const e of change.pendingEdges ?? []) this.addEdge(e.type, e.from, e.to, e.props);
+    }
+    change.status = "Applied";
+    change.confirmedBy = userId;
+    change.confirmedAt = new Date().toISOString();
+    this._save();
+    return change;
+  }
+
+  declineChange(changeId, userId) {
+    const change = this._requirePending(changeId, userId);
+    change.status = "Declined";
+    change.confirmedBy = userId;
+    change.confirmedAt = new Date().toISOString();
+    this._save();
+    return change;
+  }
+
+  _requirePending(changeId, userId) {
+    const change = this.changes.find((c) => c.id === changeId);
+    if (!change) throw new Error(`Unknown change: ${changeId}`);
+    if (change.status !== "Pending") throw new Error(`Change is not pending: ${change.status}`);
+    if (change.consentFrom && change.consentFrom !== userId) {
+      throw new Error("Only the addressee can respond to this change");
+    }
+    return change;
   }
 
   nodesByType(type) {
@@ -67,7 +140,18 @@ export class Graph {
 
   // --- Change / Affected Nodes (см. 54_Changes.md §19-20) --------------
 
-  _recordChange({ objectType, objectId, before, after, reason = null, source = "User", changedBy = null }) {
+  _recordChange({
+    objectType,
+    objectId,
+    before,
+    after,
+    reason = null,
+    source = "User",
+    changedBy = null,
+    status = "Applied",
+    consentFrom = null,
+    pendingEdges = null,
+  }) {
     const change = {
       id: `chg_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
       projectId: this.projectId,
@@ -79,7 +163,9 @@ export class Graph {
       source,
       changedBy,
       createdAt: new Date().toISOString(),
-      status: "Applied",
+      status,
+      consentFrom,
+      pendingEdges,
       affectedNodes: this._affectedNodes(objectId),
     };
     this.changes.unshift(change);

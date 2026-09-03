@@ -64,6 +64,31 @@ export function seedDemoChange(graph) {
   );
 }
 
+// Демонстрация согласия адресата (BRIDGE_LIGHT_PLAN.md §3/§9): организатор
+// добавляет фотографу съёмку напрямую, без его участия. Сцена не появляется
+// в графе — и на таймлайне фотографа — пока он сам её не подтвердит.
+export function seedDemoConsentRequest(graph) {
+  if (graph.changes.some((c) => c.objectId === "scene-detail-shoot")) return;
+
+  graph.proposeNode(
+    {
+      id: "scene-detail-shoot",
+      type: "Scene",
+      title: "Съёмка деталей (кольца, букет)",
+      location: "Отель «Метрополь», номер невесты",
+      startsAt: shiftNow(200, "minutes"),
+      endsAt: shiftNow(230, "minutes"),
+    },
+    [{ type: "ASSIGNED_TO", from: "person-photographer", to: "scene-detail-shoot" }],
+    {
+      reason: "Организатор добавил доп. точку в ваше расписание",
+      source: "User",
+      changedBy: "person-organizer",
+      consentFrom: "person-photographer",
+    }
+  );
+}
+
 function shiftNow(amount, unit) {
   const ms = unit === "minutes" ? amount * 60_000 : amount;
   return new Date(Date.now() + ms).toISOString();
