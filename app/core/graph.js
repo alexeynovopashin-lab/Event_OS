@@ -157,6 +157,39 @@ export class Graph {
     return [...seen];
   }
 
+  // --- Event Root (11_Graph_Model.md: «каждый граф имеет один корневой
+  // объект; все остальные вершины должны иметь путь к нему; если объект
+  // невозможно связать с Event, он не принадлежит системе») -------------
+
+  // Обход без учёта направления рёбер — то же определение связности, что
+  // уже использует _affectedNodes().
+  reachableFromEvent() {
+    const event = this.nodesByType("Event")[0];
+    if (!event) return new Set();
+    const seen = new Set([event.id]);
+    let frontier = [event.id];
+    while (frontier.length > 0) {
+      const next = [];
+      for (const id of frontier) {
+        for (const e of [...this.edgesFrom(id), ...this.edgesTo(id)]) {
+          const other = e.from === id ? e.to : e.from;
+          if (!seen.has(other)) {
+            seen.add(other);
+            next.push(other);
+          }
+        }
+      }
+      frontier = next;
+    }
+    return seen;
+  }
+
+  // Узлы без пути к Event — по правилу документа они не принадлежат системе.
+  orphanNodes() {
+    const reachable = this.reachableFromEvent();
+    return [...this.nodes.values()].filter((n) => n.type !== "Event" && !reachable.has(n.id));
+  }
+
   // --- Change / Affected Nodes (см. 54_Changes.md §19-20) --------------
 
   _recordChange({

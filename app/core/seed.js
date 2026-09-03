@@ -10,10 +10,16 @@ export function seedDemoProject() {
   const graph = new Graph("demo-smith-wedding");
   if (graph.nodes.size > 0) return graph; // уже засеяно ранее
 
+  // Event Root (11_Graph_Model.md): каждый граф имеет один корневой объект,
+  // все остальные вершины должны иметь путь к нему — иначе не принадлежат
+  // системе. Проверяется Graph.orphanNodes(), а не декларируется на слово.
+  graph.addNode({ id: "event-smith-wedding", type: "Event", title: "Smith Wedding" });
+
   graph.addNode({ id: "person-photographer", type: "Person", name: "Алекс", role: "photographer" });
   graph.addNode({ id: "person-driver", type: "Person", name: "Игорь", role: "driver" });
   graph.addNode({ id: "person-client", type: "Person", name: "Иван и Анна", role: "client" });
   graph.addNode({ id: "person-organizer", type: "Person", name: "Организатор", role: "organizer" });
+  graph.addEdge("RESPONSIBLE_FOR", "person-organizer", "event-smith-wedding");
 
   // Граф приглашений произвольной глубины (BRIDGE_LIGHT_PLAN.md §2/§4):
   // фотограф пригласил ассистента отдельным инвайтом, ассистент — своего.
@@ -50,6 +56,10 @@ export function seedDemoProject() {
     startsAt: shiftNow(180, "minutes"),
     endsAt: shiftNow(360, "minutes"),
   });
+
+  graph.addEdge("BELONGS_TO", "scene-ceremony", "event-smith-wedding");
+  graph.addEdge("BELONGS_TO", "scene-photosession", "event-smith-wedding");
+  graph.addEdge("BELONGS_TO", "scene-reception", "event-smith-wedding");
 
   graph.addEdge("ASSIGNED_TO", "person-photographer", "scene-ceremony");
   graph.addEdge("ASSIGNED_TO", "person-photographer", "scene-photosession");
