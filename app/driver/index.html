@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Event OS — Водитель</title>
+<link rel="manifest" href="./manifest.json" />
+<link rel="stylesheet" href="../core/navigator.css" />
+</head>
+<body>
+<header>
+  <div class="role">Водитель · Игорь</div>
+  <h1>Smith Wedding</h1>
+</header>
+<main id="app"></main>
+
+<script type="module">
+import { seedDemoProject, seedDemoChange } from "../core/seed.js";
+import { computeContext, acknowledge } from "../core/context.js";
+
+const ROLE = "driver";
+const USER_ID = "person-driver";
+
+const graph = seedDemoProject();
+if (graph.changes.length === 0) seedDemoChange(graph);
+
+render();
+
+function render() {
+  const ctx = computeContext(graph, { role: ROLE, userId: USER_ID });
+  const app = document.getElementById("app");
+  app.innerHTML = "";
+
+  if (ctx.changed.length > 0) {
+    app.appendChild(changeCard(ctx.changed[0]));
+  }
+
+  app.appendChild(sceneCard("Сейчас везу к", ctx.where, "now"));
+  app.appendChild(sceneCard("Следующая точка", ctx.whatsNext, ""));
+}
+
+function sceneCard(label, scene, extraClass) {
+  const el = document.createElement("div");
+  el.className = `card ${extraClass}`;
+  if (!scene) {
+    el.innerHTML = `<div class="label">${label}</div><div class="empty">Нет назначений</div>`;
+    return el;
+  }
+  el.innerHTML = `
+    <div class="label">${label}</div>
+    <div class="title">${scene.location}</div>
+    <div class="meta">${scene.title} · ${formatTime(scene.startsAt)}</div>
+  `;
+  return el;
+}
+
+function changeCard(change) {
+  const el = document.createElement("div");
+  el.className = "card changed";
+  el.innerHTML = `
+    <div class="label">Маршрут изменён</div>
+    <div class="title">Везёшь не в «${change.before.location}», а в «${change.after.location}»</div>
+    <div class="meta">Причина: ${change.reason ?? "не указана"}</div>
+  `;
+  const btn = document.createElement("button");
+  btn.className = "ack";
+  btn.textContent = "Понял";
+  btn.onclick = () => { acknowledge(graph, change.id, USER_ID); render(); };
+  el.appendChild(btn);
+  return el;
+}
+
+function formatTime(iso) {
+  return new Date(iso).toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" });
+}
+</script>
+</body>
+</html>

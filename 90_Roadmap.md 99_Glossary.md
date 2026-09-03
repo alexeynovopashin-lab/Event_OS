@@ -921,6 +921,82 @@ The system anticipates problems and helps resolve them.
 
 The desired product is Level 5 with optional Level 6 intelligence.
 
+---
+
+# 31. Studio Catalogue — Venue as a Connected Participant
+
+**Status: idea, recorded 2026-08-30. Not part of the MVP. Nothing implemented.**
+
+Origin: Alexey, working across three of his projects — TOMCOH_OS (a booking
+system for a photo studio, and in the future a catalogue of studios), Light Plan
+(the photographer's PWA that plans light and the shooting day), and Event OS
+itself, which is what connects the PWAs.
+
+### The idea
+
+A photo studio that lists itself in the catalogue publishes where it is on the
+map — **which building, and which side of it**. Event OS can then add the studio
+as a contractor on a project. Studio administrators can push information into
+the photographer's app. The equipment list becomes tangible: a studio keeps its
+own inventory of rental and additional lighting. The photographer gains not only
+a planning tool but a line to the studio: extend the booked time, call the
+administrator, and predict where the sun will fall on the cyclorama.
+
+### Why it matters to this architecture
+
+* The venue stops being a text field on a timeline and becomes a participant
+  with its own data, its own inventory, and someone answering on the other end.
+* `22_Roles.md` §12.1 already defines `Venue Manager` — the vocabulary exists.
+  What does not exist is the path by which a venue joins a project **from a
+  catalogue** rather than by invitation from an organizer.
+* Phase 13 already names `shared contractors` and `contractor pools`. A studio
+  catalogue is that concept seen from the other side: contractors that exist
+  before, and independently of, any project.
+
+### Open questions this raises for Event OS
+
+1. **How is a studio addressed?** `BRIDGE_LIGHT_PLAN.md` §6 concluded that an
+   organization gets no address at all — a legal entity cannot be sent anything;
+   the human beside it can. A catalogue changes the setting rather than the
+   conclusion: a registry with a keeper is exactly how LEI and DUNS assign
+   identifiers. Unresolved: does the administrator answer with a personal ID, or
+   does the studio receive an assigned address of its own?
+2. **Consent for writes.** "Administrators can push information into Light Plan"
+   is the same unresolved question already recorded for organizers writing into
+   a photographer's timeline (`23_Permissions.md` grants `ASSIGN`/`INVITE`/`RW`
+   but never states whether the recipient must agree). One answer should cover
+   both.
+3. **Requests that need a reply.** Extending a booking is not a notification —
+   it is a request that must be answered before the paid hour ends.
+   `53_Notifications.md` describes delivery, not negotiation.
+4. **Catalogue is not marketplace.** §22 lists `marketplace` among things that
+   must stay out of the MVP, and that stands. A catalogue here means a directory
+   plus a channel — no transaction, no commission, no ranking. If that line ever
+   blurs, the §22 exclusion applies.
+
+5. **Two channels, not one.** A photographer booking a studio for a portrait
+   session has no event in the Event OS sense — that is topology 1 in
+   `BRIDGE_LIGHT_PLAN.md` §4, and it is the most common case. Extending a
+   booking or calling an administrator must work without Event OS at all. Event
+   OS enters only where the studio is a contractor **on an event**: an agency
+   running a wedding that also holds the venue. Direct `photographer ↔ studio`
+   and `event ↔ studio` are separate channels and should stay separate.
+
+### Levels of abstraction
+
+The three systems answer different questions about the same reality, and none
+of them should try to answer all three:
+
+```text
+Event OS       who, with whom, when
+Studio system  where, and how to book it
+Light Plan     what the light will be like there
+```
+
+The Russian-language discussion, with the wording as Alexey gave it, is in
+`BRIDGE_LIGHT_PLAN.md` §9 and in the Light Plan repository, `ROADMAP.md`,
+section «Студия в каталоге: место, которое отвечает».
+
 ````
 
 

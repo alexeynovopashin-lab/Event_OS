@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Event OS — Организатор</title>
+<link rel="manifest" href="./manifest.json" />
+<link rel="stylesheet" href="../core/navigator.css" />
+</head>
+<body>
+<header>
+  <div class="role">Организатор</div>
+  <h1>Event OS</h1>
+</header>
+<main>
+  <div class="card">
+    <div class="label">Статус модуля</div>
+    <div class="title">Organizer = Light Plan</div>
+    <div class="meta">
+      Полный интерфейс организатора — это существующий Light Plan
+      (<code>/Light_Plan/Light_Plan/beta/index.html</code>), а не новый экран.
+      Переписывать его не нужно: он уже решает карточку заказа и Timeline.
+    </div>
+  </div>
+  <div class="card">
+    <div class="label">План миграции</div>
+    <div class="meta">
+      1. Light Plan продолжает жить как отдельное PWA (organizer-модуль).<br />
+      2. Его модель данных постепенно переводится на <code>core/graph.js</code> —
+      те же сущности (Scene, Person, Change), что уже использует Photographer/Driver/Client.<br />
+      3. Как только карточка заказа читает/пишет через общий Graph — Light Plan
+      и лёгкие ролевые PWA работают над одним проектом, без ручной синхронизации.
+    </div>
+  </div>
+</main>
+</body>
+</html>

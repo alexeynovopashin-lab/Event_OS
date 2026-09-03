@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Event OS — Клиент</title>
+<link rel="manifest" href="./manifest.json" />
+<link rel="stylesheet" href="../core/navigator.css" />
+</head>
+<body>
+<header>
+  <div class="role">Ваша свадьба</div>
+  <h1>Иван и Анна</h1>
+</header>
+<main id="app"></main>
+
+<script type="module">
+// Клиент изолирован (24_Communication.md, 26_Postproduction.md §81):
+// видит только Scene своего дня, без внутренней операционной информации.
+import { seedDemoProject } from "../core/seed.js";
+import { computeContext } from "../core/context.js";
+
+const ROLE = "client";
+const USER_ID = "person-client";
+
+const graph = seedDemoProject();
+render();
+
+function render() {
+  const ctx = computeContext(graph, { role: ROLE, userId: USER_ID });
+  const app = document.getElementById("app");
+  app.innerHTML = "";
+
+  app.appendChild(sceneCard("Сейчас", ctx.where, "now"));
+  app.appendChild(sceneCard("Дальше", ctx.whatsNext, ""));
+
+  const progress = document.createElement("div");
+  progress.className = "progress";
+  progress.textContent = `Программа дня: ${ctx.completed} из ${ctx.total} завершено`;
+  app.appendChild(progress);
+}
+
+function sceneCard(label, scene, extraClass) {
+  const el = document.createElement("div");
+  el.className = `card ${extraClass}`;
+  if (!scene) {
+    el.innerHTML = `<div class="label">${label}</div><div class="empty">День завершён</div>`;
+    return el;
+  }
+  el.innerHTML = `
+    <div class="label">${label}</div>
+    <div class="title">${scene.title}</div>
+    <div class="meta">${scene.location} · ${formatTime(scene.startsAt)}</div>
+  `;
+  return el;
+}
+
+function formatTime(iso) {
+  return new Date(iso).toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" });
+}
+</script>
+</body>
+</html>

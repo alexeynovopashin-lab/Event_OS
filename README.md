@@ -44,5 +44,19 @@
 
 41_Design_Principles.md
 
+50_Event_Lifecycle.md
+
+51_Workflow.md
+
+52_Tasks.md
+
+53_Notifications.md
+
+54_Changes.md
+
 90_Roadmap.md
 99_Glossary.md
+
+Отдельно, вне нумерации: `BRIDGE_LIGHT_PLAN.md` — живая очередь находок из
+Light Plan, требующих разбора здесь, когда работа над Event OS возобновится.
+`app/` — рабочий скелет реализации, см. `app/README.md`.
