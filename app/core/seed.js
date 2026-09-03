@@ -4,6 +4,7 @@
 // один и тот же Project Graph.
 
 import { Graph } from "./graph.js";
+import { appId } from "./id.js";
 
 export function seedDemoProject() {
   const graph = new Graph("demo-smith-wedding");
@@ -60,6 +61,23 @@ export function seedDemoProject() {
   graph.addEdge("PARTICIPATES_IN", "person-client", "scene-reception");
   graph.addEdge("PRECEDES", "scene-ceremony", "scene-photosession");
   graph.addEdge("PRECEDES", "scene-photosession", "scene-reception");
+
+  // Участник из справочника, а не по инвайту (BRIDGE_LIGHT_PLAN.md §9):
+  // ресторан существовал в каталоге площадок до этого проекта. Адресуется
+  // собственным номером зала (appId(phone, "place")), а не личным ID
+  // администратора на смене — тот лишь держатель ключа при этом адресе.
+  // Ни INVITED_BY, ни DEPENDS_ON к person-organizer нет — попадание в
+  // проект не через приглашение.
+  const venuePhone = "79161234567"; // уже нормализован (telFull() — в Light Plan)
+  const venueId = appId(venuePhone, "place");
+  graph.addNode({
+    id: venueId,
+    type: "Person",
+    name: "Ресторан «Терраса», администратор",
+    role: "venue_manager",
+    joinedVia: "catalogue",
+  });
+  graph.addEdge("ASSIGNED_TO", venueId, "scene-reception");
 
   return graph;
 }
