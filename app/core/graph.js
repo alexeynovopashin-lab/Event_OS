@@ -138,6 +138,25 @@ export class Graph {
     return this.edges.filter((e) => e.to === id && (!type || e.type === type));
   }
 
+  // Кто зависит от этого узла по DEPENDS_ON, на любую глубину
+  // (BRIDGE_LIGHT_PLAN.md §2/§4): ассистент фотографа, ассистент ассистента
+  // и так далее — рекурсия, не список с фиксированным числом уровней.
+  // DEPENDS_ON сам по себе не даёт доступа никому, кроме того, от кого
+  // зависят — это провенанс, не право видимости (см. §4).
+  dependentsOf(id) {
+    const seen = new Set();
+    const walk = (current) => {
+      for (const e of this.edgesTo(current, "DEPENDS_ON")) {
+        if (!seen.has(e.from)) {
+          seen.add(e.from);
+          walk(e.from);
+        }
+      }
+    };
+    walk(id);
+    return [...seen];
+  }
+
   // --- Change / Affected Nodes (см. 54_Changes.md §19-20) --------------
 
   _recordChange({

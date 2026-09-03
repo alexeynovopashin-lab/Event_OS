@@ -48,6 +48,16 @@ npx serve "Event OS/app"
 `Graph.updateNode()` для правки существующей: обе создают `Change` со
 `status: "Pending"` и не трогают сам узел до ответа адресата.
 
+**Граф приглашений произвольной глубины (`BRIDGE_LIGHT_PLAN.md §2/§4`,
+решено 3 сентября 2026).** `core/seed.js` заводит `person-assistant`
+(зависит от `person-photographer` через `DEPENDS_ON`) и
+`person-second-assistant` (зависит от `person-assistant`) — два уровня
+рекурсии без единой строчки специального кода под каждый уровень:
+`Graph.dependentsOf('person-photographer')` обходит цепочку рекурсивно и
+возвращает обоих. Ни у ассистента, ни у его ассистента нет ребра к
+`person-organizer` — структурно, а не как ограничение прав: организатор не
+обязан знать про эту ветку, потому что запрашивать её ему неоткуда.
+
 ## organizer/ — статус
 
 `organizer/index.html` сейчас не полноценное приложение, а bridge-страница:

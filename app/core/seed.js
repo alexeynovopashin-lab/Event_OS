@@ -14,6 +14,15 @@ export function seedDemoProject() {
   graph.addNode({ id: "person-client", type: "Person", name: "Иван и Анна", role: "client" });
   graph.addNode({ id: "person-organizer", type: "Person", name: "Организатор", role: "organizer" });
 
+  // Граф приглашений произвольной глубины (BRIDGE_LIGHT_PLAN.md §2/§4):
+  // фотограф пригласил ассистента отдельным инвайтом, ассистент — своего.
+  // Организатор об этой ветке не знает и не обязан знать — ни у одного из
+  // них нет ребра к person-organizer, только DEPENDS_ON вверх по цепочке.
+  graph.addNode({ id: "person-assistant", type: "Person", name: "Марина", role: "assistant" });
+  graph.addNode({ id: "person-second-assistant", type: "Person", name: "Дима", role: "assistant" });
+  graph.addEdge("DEPENDS_ON", "person-assistant", "person-photographer");
+  graph.addEdge("DEPENDS_ON", "person-second-assistant", "person-assistant");
+
   graph.addNode({
     id: "scene-ceremony",
     type: "Scene",
