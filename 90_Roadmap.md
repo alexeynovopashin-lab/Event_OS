@@ -927,7 +927,7 @@ The desired product is Level 5 with optional Level 6 intelligence.
 
 **Status: idea, recorded 2026-08-30. Not part of the MVP. Nothing implemented.**
 
-Origin: Alexey, working across three of his projects — TOMCOH_OS (a booking
+Origin: Alexey, working across three of his projects — BroniOS (a booking
 system for a photo studio, and in the future a catalogue of studios), Light Plan
 (the photographer's PWA that plans light and the shooting day), and Event OS
 itself, which is what connects the PWAs.
