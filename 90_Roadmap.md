@@ -576,7 +576,11 @@ Allow participants to understand their own workload.
 * project workload;
 * overlapping events;
 * team workload;
-* contractor availability.
+* contractor availability;
+* hours map (light, optional): planned hours from fixed-time items and roles,
+  actual hours entered by the person, rolled up through the event shell
+  (Alexey, 09.10.2026; details and open questions: `51_Workflow.md §23`).
+  No Scrum backlog or sprints.
 
 ### Important principle
 
