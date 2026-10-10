@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0}
+body{background:#efedea;color:#17181a;font-family:'Golos Text',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#17181a}
+a:hover{color:#5a5c61}
+</style>
+</helmet>
+<div style="max-width:1180px;margin:0 auto;padding:56px 40px 120px">
+
+  <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:8px">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9b9da2">Event OS · Organizer Workspace</span>
+    <span style="height:1px;flex:1;background:rgba(23,24,26,.12)"></span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">04.09.2026</span>
+  </div>
+  <h1 style="margin:0 0 14px;font-size:44px;line-height:1.06;font-weight:600;letter-spacing:-.025em;max-width:16em;text-wrap:pretty">Дизайн-контекст перед тем, как рисовать экраны</h1>
+  <p style="margin:0 0 44px;font-size:17px;line-height:1.55;color:#6e7075;max-width:44em;text-wrap:pretty">Прочитал вашу документную базу и рабочий скелет <span style="font-family:'JetBrains Mono',monospace;font-size:14px">app/</span>. Ниже — что я из неё вынес, где бриф спорит с документами, как я предлагаю это решить и на какой типографике/палитре собирать. Проверьте до того, как я начну экраны.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:52px">
+    <div style="background:#fff;border-radius:18px;padding:22px 22px 24px;border:1px solid rgba(23,24,26,.07)">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2;margin-bottom:14px">Источник</div>
+      <div style="font-size:15px;line-height:1.5;color:#17181a">28 документов Event OS + <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px">core/graph.js</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px">context.js</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px">seed.js</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px">navigator.css</span></div>
+    </div>
+    <div style="background:#fff;border-radius:18px;padding:22px 22px 24px;border:1px solid rgba(23,24,26,.07)">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2;margin-bottom:14px">Роль и устройство</div>
+      <div style="font-size:15px;line-height:1.5;color:#17181a">Organizer Workspace, десктоп и планшет. Планирование, не исполнение — Navigator остаётся мобильным.</div>
+    </div>
+    <div style="background:#fff;border-radius:18px;padding:22px 22px 24px;border:1px solid rgba(23,24,26,.07)">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2;margin-bottom:14px">Референсы</div>
+      <div style="font-size:15px;line-height:1.5;color:#17181a">Две приложенные картинки читаю как <i>плотность и материал</i>: светлый холст, крупные радиусы, кластеры аватаров. Не как макет.</div>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:20px">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">01</span>
+    <h2 style="margin:0;font-size:24px;font-weight:600;letter-spacing:-.015em">Семь правил, которым подчиняется каждый экран</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(23,24,26,.09);border-radius:18px;overflow:hidden;margin-bottom:52px">
+    <div style="background:#fff;padding:24px 26px 26px">
+      <div style="font-size:16px;font-weight:600;margin-bottom:7px">Событие — корень, не клиент</div>
+      <div style="font-size:14.5px;line-height:1.55;color:#6e7075">Всё висит на Event. Заказчик, подрядчик, зал, документ — вершины, достижимые от события. Значит в интерфейсе нет «раздела контактов» как самостоятельной жизни.</div>
+    </div>
+    <div style="background:#fff;padding:24px 26px 26px">
+      <div style="font-size:16px;font-weight:600;margin-bottom:7px">Тишина по умолчанию</div>
+      <div style="font-size:14.5px;line-height:1.55;color:#6e7075">Если всё по плану — виджет говорит «по плану» одной строкой. Отклонение получает вес, размер и место. Exception-first, а не лента активности.</div>
+    </div>
+    <div style="background:#fff;padding:24px 26px 26px">
+      <div style="font-size:16px;font-weight:600;margin-bottom:7px">Статус читается без цвета</div>
+      <div style="font-size:14.5px;line-height:1.55;color:#6e7075">Всегда знак + слово. Цвет только усиливает. Красный — исключительно риск и удаление.</div>
+    </div>
+    <div style="background:#fff;padding:24px 26px 26px">
+      <div style="font-size:16px;font-weight:600;margin-bottom:7px">Изменение — объект первого класса</div>
+      <div style="font-size:14.5px;line-height:1.55;color:#6e7075">Не «время 13:30», а «13:00 → 13:30, причина, кого касается». План и факт не сливаются визуально.</div>
+    </div>
+    <div style="background:#fff;padding:24px 26px 26px">
+      <div style="font-size:16px;font-weight:600;margin-bottom:7px">Карточка отвечает на два вопроса</div>
+      <div style="font-size:14.5px;line-height:1.55;color:#6e7075">Что это и что мне с этим делать. Название, дата, главный статус, следующее действие. Всё остальное — по клику.</div>
+    </div>
+    <div style="background:#fff;padding:24px 26px 26px">
+      <div style="font-size:16px;font-weight:600;margin-bottom:7px">Пустота — это иерархия</div>
+      <div style="font-size:14.5px;line-height:1.55;color:#6e7075">Сначала решаем группировкой, отступом и кеглем. Тень, цвет и обводка — в последнюю очередь и по делу.</div>
+    </div>
+    <div style="background:#fff;padding:24px 26px 26px;grid-column:span 2">
+      <div style="font-size:16px;font-weight:600;margin-bottom:7px">Один главный action на контекст</div>
+      <div style="font-size:14.5px;line-height:1.55;color:#6e7075">В каждом состоянии события — одна очевидная кнопка. У подготовки это «Собрать команду», у текущего — «Открыть Navigator», у прошедшего — «Передать материалы».</div>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:20px">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">02</span>
+    <h2 style="margin:0;font-size:24px;font-weight:600;letter-spacing:-.015em">Где бриф спорит с документами</h2>
+  </div>
+  <div style="background:#17181a;color:#f7f6f4;border-radius:22px;padding:34px 36px 36px;margin-bottom:52px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:34px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#8a8c92;margin-bottom:12px">Бриф</div>
+        <div style="font-size:19px;line-height:1.45;font-weight:500">«Экран представляет из себя набор виджетов со статусами»</div>
+      </div>
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#8a8c92;margin-bottom:12px">40_UI_Philosophy §31</div>
+        <div style="font-size:19px;line-height:1.45;font-weight:500">«Не строить универсальный Dashboard» — иначе это панель управления базой данных</div>
+      </div>
+    </div>
+    <div style="height:1px;background:rgba(255,255,255,.14);margin:30px 0 26px"></div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#8a8c92;margin-bottom:12px">Как предлагаю решить</div>
+    <div style="font-size:16px;line-height:1.6;color:#d8d7d4;max-width:60em;text-wrap:pretty">Виджеты остаются — но это не «Погода / Задачи / Бюджет / Файлы». Каждый виджет отвечает на один вопрос организатора из §6.1: <b style="color:#fff;font-weight:600">что сейчас</b>, <b style="color:#fff;font-weight:600">что требует внимания</b>, <b style="color:#fff;font-weight:600">что изменилось</b>, <b style="color:#fff;font-weight:600">что приближается</b>, <b style="color:#fff;font-weight:600">где проблема</b>. Плюс два ресурсных: <b style="color:#fff;font-weight:600">загрузка команд</b> и <b style="color:#fff;font-weight:600">неподтверждённые роли</b>. Семь виджетов, у каждого — свой вопрос и свой primary action. Ни одного виджета «просто со статистикой».</div>
+  </div>
+
+  <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">03</span>
+    <h2 style="margin:0;font-size:24px;font-weight:600;letter-spacing:-.015em">18 сущностей из брифа — как они объединяются</h2>
+  </div>
+  <p style="margin:0 0 22px;font-size:15px;line-height:1.55;color:#6e7075;max-width:48em">Плоский список из 18 ролей на экране нечитаем. Группирую в шесть цехов — это и папки специалистов, и заготовки команд, и фильтры на таймлайне. Место и организация (зал, отель, студия) — отдельный тип: адресуются номером объекта, а не человеком (<span style="font-family:'JetBrains Mono',monospace;font-size:13.5px">appId(phone,"place")</span>).</p>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px">
+    <div style="background:#fff;border-radius:16px;border:1px solid rgba(23,24,26,.07);padding:20px 20px 22px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px"><span style="width:7px;height:7px;border-radius:50%;background:#17181a"></span><span style="font-size:13px;font-weight:600;letter-spacing:.01em">Управление</span></div>
+      <div style="font-size:14.5px;line-height:1.75;color:#4a4c51">Организатор<br>Координатор</div>
+    </div>
+    <div style="background:#fff;border-radius:16px;border:1px solid rgba(23,24,26,.07);padding:20px 20px 22px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px"><span style="width:7px;height:7px;border-radius:50%;background:#17181a"></span><span style="font-size:13px;font-weight:600">Съёмка</span></div>
+      <div style="font-size:14.5px;line-height:1.75;color:#4a4c51">Фотограф<br>Оператор<br>Осветитель</div>
+    </div>
+    <div style="background:#fff;border-radius:16px;border:1px solid rgba(23,24,26,.07);padding:20px 20px 22px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px"><span style="width:7px;height:7px;border-radius:50%;background:#17181a"></span><span style="font-size:13px;font-weight:600">Программа</span></div>
+      <div style="font-size:14.5px;line-height:1.75;color:#4a4c51">Ведущий<br>Диджей<br>Музыканты</div>
+    </div>
+    <div style="background:#fff;border-radius:16px;border:1px solid rgba(23,24,26,.07);padding:20px 20px 22px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px"><span style="width:7px;height:7px;border-radius:50%;background:#17181a"></span><span style="font-size:13px;font-weight:600">Образ</span></div>
+      <div style="font-size:14.5px;line-height:1.75;color:#4a4c51">Стилист<br>Визажист</div>
+    </div>
+    <div style="background:#fff;border-radius:16px;border:1px solid rgba(23,24,26,.07);padding:20px 20px 22px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px"><span style="width:7px;height:7px;border-radius:50%;background:#17181a"></span><span style="font-size:13px;font-weight:600">Оформление и стол</span></div>
+      <div style="font-size:14.5px;line-height:1.75;color:#4a4c51">Флорист<br>Декораторы<br>Кондитер</div>
+    </div>
+    <div style="background:#fff;border-radius:16px;border:1px solid rgba(23,24,26,.07);padding:20px 20px 22px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px"><span style="width:7px;height:7px;border-radius:50%;background:#17181a"></span><span style="font-size:13px;font-weight:600">Логистика</span></div>
+      <div style="font-size:14.5px;line-height:1.75;color:#4a4c51">Водитель</div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:52px">
+    <div style="background:#faf9f7;border-radius:16px;border:1px dashed rgba(23,24,26,.16);padding:20px 20px 22px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2;margin-bottom:12px">Тип: Place</div>
+      <div style="font-size:14.5px;line-height:1.7;color:#4a4c51">Банкетный зал · Отель · Фотостудия — карточка объекта с администратором на смене, а не человек</div>
+    </div>
+    <div style="background:#faf9f7;border-radius:16px;border:1px dashed rgba(23,24,26,.16);padding:20px 20px 22px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2;margin-bottom:12px">Тип: Client</div>
+      <div style="font-size:14.5px;line-height:1.7;color:#4a4c51">Жених и невеста — одна сущность-заказчик с двумя персонами внутри, один канал связи</div>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:20px">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">04</span>
+    <h2 style="margin:0;font-size:24px;font-weight:600;letter-spacing:-.015em">Три состояния события</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:52px">
+    <div style="background:#fff;border-radius:18px;border:1px solid rgba(23,24,26,.09);padding:24px 24px 26px">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:16px">
+        <span style="width:9px;height:9px;border-radius:50%;border:1.5px solid #9b9da2"></span>
+        <span style="font-size:14px;font-weight:600">Подготовка</span>
+      </div>
+      <div style="font-size:14.5px;line-height:1.6;color:#6e7075;margin-bottom:18px">Спокойная обводка, без заливки. Главное на карточке — чего не хватает: неподтверждённые роли, незакрытые задачи, дата.</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9b9da2">Lead → Planning → Confirmed → Preparation</div>
+    </div>
+    <div style="background:#17181a;color:#f7f6f4;border-radius:18px;padding:24px 24px 26px">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:16px">
+        <span style="width:9px;height:9px;border-radius:50%;background:oklch(.72 .16 148)"></span>
+        <span style="font-size:14px;font-weight:600">Идёт сейчас</span>
+      </div>
+      <div style="font-size:14.5px;line-height:1.6;color:#c9c8c5;margin-bottom:18px">Инверсия — единственный тёмный блок на экране. Внутри только NOW / NEXT / ALERT, без бюджета и документов.</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#8a8c92">Approaching → Active → Wrapping Up</div>
+    </div>
+    <div style="background:#eceae7;border-radius:18px;border:1px solid rgba(23,24,26,.05);padding:24px 24px 26px">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:16px">
+        <span style="width:9px;height:9px;border-radius:50%;background:#9b9da2"></span>
+        <span style="font-size:14px;font-weight:600;color:#4a4c51">Прошедшее</span>
+      </div>
+      <div style="font-size:14.5px;line-height:1.6;color:#75777c;margin-bottom:18px">Приглушённая плашка. Но не архив: живут параллельные треки — продакшн, передача, деньги, отзыв. Каждый закрывается отдельно.</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9b9da2">Production · Delivery · Financial</div>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:20px">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">05</span>
+    <h2 style="margin:0;font-size:24px;font-weight:600;letter-spacing:-.015em">Карта экранов</h2>
+  </div>
+  <div style="background:#fff;border-radius:18px;border:1px solid rgba(23,24,26,.07);overflow:hidden;margin-bottom:52px">
+    <div style="display:grid;grid-template-columns:150px 1fr 200px;gap:24px;padding:14px 26px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2;border-bottom:1px solid rgba(23,24,26,.07)">
+      <div>Экран</div><div>Отвечает на вопрос</div><div>Основа</div>
+    </div>
+    <div style="display:grid;grid-template-columns:150px 1fr 200px;gap:24px;padding:18px 26px;border-bottom:1px solid rgba(23,24,26,.06);align-items:baseline">
+      <div style="font-size:15px;font-weight:600">Рабочий стол</div><div style="font-size:14.5px;line-height:1.5;color:#4a4c51">Что сейчас, что требует внимания, что изменилось, что приближается</div><div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9b9da2">20_Workspaces §6.1</div>
+    </div>
+    <div style="display:grid;grid-template-columns:150px 1fr 200px;gap:24px;padding:18px 26px;border-bottom:1px solid rgba(23,24,26,.06);align-items:baseline">
+      <div style="font-size:15px;font-weight:600">Календарь</div><div style="font-size:14.5px;line-height:1.5;color:#4a4c51">Куда влезает новый заказ и где в один день стоят два события</div><div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9b9da2">Бриф</div>
+    </div>
+    <div style="display:grid;grid-template-columns:150px 1fr 200px;gap:24px;padding:18px 26px;border-bottom:1px solid rgba(23,24,26,.06);align-items:baseline">
+      <div style="font-size:15px;font-weight:600">Карточка события</div><div style="font-size:14.5px;line-height:1.5;color:#4a4c51">Timeline по сценам, команда, изменения — в трёх состояниях</div><div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9b9da2">13_Timeline_Canvas</div>
+    </div>
+    <div style="display:grid;grid-template-columns:150px 1fr 200px;gap:24px;padding:18px 26px;border-bottom:1px solid rgba(23,24,26,.06);align-items:baseline">
+      <div style="font-size:15px;font-weight:600">Папки специалистов</div><div style="font-size:14.5px;line-height:1.5;color:#4a4c51">Кто свободен на дату, с кем уже работали, кого можно позвать</div><div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9b9da2">22_Roles</div>
+    </div>
+    <div style="display:grid;grid-template-columns:150px 1fr 200px;gap:24px;padding:18px 26px;border-bottom:1px solid rgba(23,24,26,.06);align-items:baseline">
+      <div style="font-size:15px;font-weight:600">Команды</div><div style="font-size:14.5px;line-height:1.5;color:#4a4c51">Собрать состав, переиспользовать, расформировать</div><div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9b9da2">22_Roles §31</div>
+    </div>
+    <div style="display:grid;grid-template-columns:150px 1fr 200px;gap:24px;padding:18px 26px;align-items:baseline">
+      <div style="font-size:15px;font-weight:600">Корзина</div><div style="font-size:14.5px;line-height:1.5;color:#4a4c51">Что удалено, кем, когда, можно ли вернуть</div><div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9b9da2">41_Design §72–73</div>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:20px">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">06</span>
+    <h2 style="margin:0;font-size:24px;font-weight:600;letter-spacing:-.015em">Типографика и палитра</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:1.35fr 1fr;gap:16px;margin-bottom:16px">
+    <div style="background:#fff;border-radius:18px;border:1px solid rgba(23,24,26,.07);padding:28px 30px 30px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:22px">
+        <div style="font-size:17px;font-weight:600">Golos Text</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">интерфейс · 400 / 500 / 600</div>
+      </div>
+      <div style="font-size:38px;line-height:1.1;font-weight:600;letter-spacing:-.02em;margin-bottom:6px">Иванов + Петрова</div>
+      <div style="font-size:17px;color:#6e7075;margin-bottom:24px">Церемония перенесена на 13:30</div>
+      <div style="height:1px;background:rgba(23,24,26,.08);margin-bottom:22px"></div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px">
+        <div style="font-size:17px;font-weight:600;font-family:'JetBrains Mono',monospace">JetBrains Mono</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">время · суммы · метки</div>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:26px;letter-spacing:-.01em;display:flex;gap:26px;flex-wrap:wrap"><span>13:30</span><span style="color:#9b9da2">24 АВГ</span><span>185 000 ₽</span><span style="color:#9b9da2">+20 мин</span></div>
+      <div style="margin-top:24px;font-size:14px;line-height:1.6;color:#6e7075;text-wrap:pretty">Оба шрифта с полноценной кириллицей. Golos Text — российский UI-гротеск, не Inter и не Roboto. Моно берёт на себя всё, что нужно сравнивать глазами по колонке: время, даты, деньги, дельты.</div>
+    </div>
+    <div style="background:#fff;border-radius:18px;border:1px solid rgba(23,24,26,.07);padding:28px 30px 30px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2;margin-bottom:20px">Палитра</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px">
+        <div><div style="height:52px;border-radius:11px;background:#efedea;border:1px solid rgba(23,24,26,.08)"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9b9da2;margin-top:7px">холст</div></div>
+        <div><div style="height:52px;border-radius:11px;background:#fff;border:1px solid rgba(23,24,26,.08)"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9b9da2;margin-top:7px">карточка</div></div>
+        <div><div style="height:52px;border-radius:11px;background:#17181a"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9b9da2;margin-top:7px">чернила</div></div>
+        <div><div style="height:52px;border-radius:11px;background:#9b9da2"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9b9da2;margin-top:7px">тихий</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px">
+        <div><div style="height:52px;border-radius:11px;background:oklch(.62 .13 148)"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9b9da2;margin-top:7px">идёт</div></div>
+        <div><div style="height:52px;border-radius:11px;background:oklch(.72 .13 72)"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9b9da2;margin-top:7px">внимание</div></div>
+        <div><div style="height:52px;border-radius:11px;background:oklch(.58 .17 25)"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9b9da2;margin-top:7px">риск</div></div>
+      </div>
+      <div style="font-size:14px;line-height:1.6;color:#6e7075;text-wrap:pretty">Три статусных цвета одной светлоты и хромы, различаются только тоном. Каждый всегда идёт со знаком и словом. Красный не используется для «новое» и «непрочитанное».</div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:52px">
+    <div style="background:#fff;border-radius:18px;border:1px solid rgba(23,24,26,.07);padding:24px 26px 26px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2;margin-bottom:18px">Знаки состояния</div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:15px">
+        <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;color:oklch(.55 .12 148)">✓</span> Подтверждено</div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;color:#9b9da2">◷</span> Ждём ответа</div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;color:oklch(.62 .13 72)">△</span> Требует решения</div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;color:oklch(.52 .17 25)">✕</span> Отказ</div>
+      </div>
+    </div>
+    <div style="background:#fff;border-radius:18px;border:1px solid rgba(23,24,26,.07);padding:24px 26px 26px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2;margin-bottom:18px">Аватары</div>
+      <div style="display:flex;align-items:center;margin-bottom:16px">
+        <div style="width:40px;height:40px;border-radius:50%;background:#dedbd6;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:#5a5c61">АК</div>
+        <div style="width:40px;height:40px;border-radius:50%;background:#d6d9de;border:2px solid #fff;margin-left:-11px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:#5a5c61">МС</div>
+        <div style="width:40px;height:40px;border-radius:50%;background:#e0dcd4;border:2px solid #fff;margin-left:-11px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:#5a5c61">ИГ</div>
+        <div style="width:40px;height:40px;border-radius:50%;background:#17181a;border:2px solid #fff;margin-left:-11px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:#fff">+5</div>
+      </div>
+      <div style="font-size:14px;line-height:1.6;color:#6e7075;text-wrap:pretty">Слот под фото; пока фото нет — монограмма на тихом фоне. Аватар только там, где важно «кто именно», не как декор.</div>
+    </div>
+    <div style="background:#fff;border-radius:18px;border:1px solid rgba(23,24,26,.07);padding:24px 26px 26px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2;margin-bottom:18px">Радиусы и плотность</div>
+      <div style="display:flex;align-items:flex-end;gap:10px;margin-bottom:16px">
+        <div style="width:44px;height:32px;border-radius:8px;background:#efedea;border:1px solid rgba(23,24,26,.09)"></div>
+        <div style="width:44px;height:40px;border-radius:12px;background:#efedea;border:1px solid rgba(23,24,26,.09)"></div>
+        <div style="width:44px;height:48px;border-radius:18px;background:#efedea;border:1px solid rgba(23,24,26,.09)"></div>
+        <div style="width:44px;height:56px;border-radius:22px;background:#efedea;border:1px solid rgba(23,24,26,.09)"></div>
+      </div>
+      <div style="font-size:14px;line-height:1.6;color:#6e7075;text-wrap:pretty">8 / 12 / 18 / 22. Сетка 4 px, шаг отступов 8. Обводка вместо тени — тень только у того, что всплывает над контекстом.</div>
+    </div>
+  </div>
+
+  <div style="background:#fff;border-radius:22px;border:1px solid rgba(23,24,26,.07);padding:34px 36px 36px">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2;margin-bottom:16px">Дальше</div>
+    <div style="font-size:20px;line-height:1.45;font-weight:500;max-width:34em;margin-bottom:22px;text-wrap:pretty">Отправил вам форму с вопросами — там пять решений, которые я не хочу принимать за вас. Сразу после ответов собираю рабочий стол в двух-трёх вариантах плотности.</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 14px;border-radius:9px;background:#efedea;color:#4a4c51">светлая или тёмная тема</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 14px;border-radius:9px;background:#efedea;color:#4a4c51">порядок экранов</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 14px;border-radius:9px;background:#efedea;color:#4a4c51">фото для аватаров</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 14px;border-radius:9px;background:#efedea;color:#4a4c51">глубина прототипа</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 14px;border-radius:9px;background:#efedea;color:#4a4c51">масштаб данных</span>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

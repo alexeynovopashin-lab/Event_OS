@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0}
+body{background:#efedea;color:#17181a;font-family:'Golos Text',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#17181a;text-decoration:none}
+a:hover{color:#5a5c61}
+::selection{background:#17181a;color:#fff}
+</style>
+</helmet>
+<div style="max-width:1080px;margin:0 auto;padding:56px 40px 100px">
+
+  <div style="display:flex;align-items:center;gap:13px;margin-bottom:26px">
+    <div style="width:34px;height:34px;border-radius:10px;background:#17181a;display:flex;align-items:center;justify-content:center;color:#fff;font-size:17px;font-weight:600;letter-spacing:-.02em">D</div>
+    <div>
+      <div style="font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.1">Dreams</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2;margin-top:2px">Event OS · Organizer Workspace</div>
+    </div>
+    <span style="flex:1"></span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">демо · 04.09.2026</span>
+  </div>
+
+  <h1 style="margin:0 0 14px;font-size:40px;line-height:1.08;font-weight:600;letter-spacing:-.025em;max-width:20em;text-wrap:pretty">Рабочая среда организатора событий</h1>
+  <p style="margin:0 0 44px;font-size:16.5px;line-height:1.55;color:#6e7075;max-width:44em;text-wrap:pretty">Четыре экрана десктопной версии, собранные по документной базе Event OS. Масштаб агентства: 41 событие в работе, 128 специалистов в папках, до трёх событий в один день. Статичные макеты — интерактив следующим шагом.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:44px">
+
+    <a href="Рабочий стол.dc.html" style="display:block;background:#17181a;color:#f7f6f4;border-radius:18px;padding:24px 26px 26px" style-hover="background:#232529;color:#f7f6f4">
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:14px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8a8c92">01</span>
+        <span style="font-size:18px;font-weight:600;letter-spacing:-.015em">Рабочий стол</span>
+      </div>
+      <div style="font-size:14px;line-height:1.55;color:#c3c2bf;margin-bottom:18px;text-wrap:pretty">Семь виджетов, каждый отвечает на один вопрос организатора: что идёт сейчас, что требует решения, что изменилось, что приближается, кто не подтвердил, где перегружены команды, что закрывать после события.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px">
+        <span style="font-size:11.5px;padding:4px 9px;border-radius:6px;background:rgba(255,255,255,.09);color:#c3c2bf">NOW / NEXT</span>
+        <span style="font-size:11.5px;padding:4px 9px;border-radius:6px;background:rgba(255,255,255,.09);color:#c3c2bf">exception-first</span>
+        <span style="font-size:11.5px;padding:4px 9px;border-radius:6px;background:rgba(255,255,255,.09);color:#c3c2bf">3 состояния события</span>
+      </div>
+    </a>
+
+    <a href="Календарь.dc.html" style="display:block;background:#fff;border:1px solid rgba(23,24,26,.07);border-radius:18px;padding:24px 26px 26px" style-hover="border-color:rgba(23,24,26,.28);color:#17181a">
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:14px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2">02</span>
+        <span style="font-size:18px;font-weight:600;letter-spacing:-.015em">Календарь</span>
+      </div>
+      <div style="font-size:14px;line-height:1.55;color:#6e7075;margin-bottom:18px;text-wrap:pretty">Сентябрь 2026, 16 событий. Несколько событий в один день, предупреждение о пересечении команд, выбранный день на общей шкале 09→24 со сценами и отметкой текущего времени.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px">
+        <span style="font-size:11.5px;padding:4px 9px;border-radius:6px;background:#f2f0ed;color:#4a4c51">месяц</span>
+        <span style="font-size:11.5px;padding:4px 9px;border-radius:6px;background:#f2f0ed;color:#4a4c51">параллельные события</span>
+        <span style="font-size:11.5px;padding:4px 9px;border-radius:6px;background:#f2f0ed;color:#4a4c51">конфликты</span>
+      </div>
+    </a>
+
+    <a href="Команды.dc.html" style="display:block;background:#fff;border:1px solid rgba(23,24,26,.07);border-radius:18px;padding:24px 26px 26px" style-hover="border-color:rgba(23,24,26,.28);color:#17181a">
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:14px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2">03</span>
+        <span style="font-size:18px;font-weight:600;letter-spacing:-.015em">Команды</span>
+      </div>
+      <div style="font-size:14px;line-height:1.55;color:#6e7075;margin-bottom:18px;text-wrap:pretty">Сборка команды по шести цехам с пустыми слотами, постоянные составы, команды под событие и расформированные — состав сохраняется как шаблон, а не удаляется.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px">
+        <span style="font-size:11.5px;padding:4px 9px;border-radius:6px;background:#f2f0ed;color:#4a4c51">создание</span>
+        <span style="font-size:11.5px;padding:4px 9px;border-radius:6px;background:#f2f0ed;color:#4a4c51">расформирование</span>
+        <span style="font-size:11.5px;padding:4px 9px;border-radius:6px;background:#f2f0ed;color:#4a4c51">загрузка</span>
+      </div>
+    </a>
+
+    <a href="Специалисты.dc.html" style="display:block;background:#fff;border:1px solid rgba(23,24,26,.07);border-radius:18px;padding:24px 26px 26px" style-hover="border-color:rgba(23,24,26,.28);color:#17181a">
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:14px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2">04</span>
+        <span style="font-size:18px;font-weight:600;letter-spacing:-.015em">Специалисты</span>
+      </div>
+      <div style="font-size:14px;line-height:1.55;color:#6e7075;margin-bottom:18px;text-wrap:pretty">Папки по цехам и ролям, доступность на дату, типы отношений — от постоянного до однодневного. Карточка специалиста как узел графа, включая цепочку «приводит своих».</div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px">
+        <span style="font-size:11.5px;padding:4px 9px;border-radius:6px;background:#f2f0ed;color:#4a4c51">папки</span>
+        <span style="font-size:11.5px;padding:4px 9px;border-radius:6px;background:#f2f0ed;color:#4a4c51">граф приглашений</span>
+        <span style="font-size:11.5px;padding:4px 9px;border-radius:6px;background:#f2f0ed;color:#4a4c51">временный доступ</span>
+      </div>
+    </a>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-bottom:14px">
+    <div style="background:#fff;border:1px solid rgba(23,24,26,.07);border-radius:18px;padding:24px 26px 26px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2;margin-bottom:16px">Основание</div>
+      <div style="font-size:15px;line-height:1.6;color:#4a4c51;margin-bottom:18px;text-wrap:pretty">Экраны следуют документам Event OS, а не рисуют базу данных: событие — корень графа, тишина по умолчанию, статус читается без цвета, изменение — объект первого класса, деньги скрываются по роли.</div>
+      <a href="Design Context.dc.html" style="font-size:13.5px;font-weight:500" style-hover="color:#5a5c61">Дизайн-контекст и разбор принципов →</a>
+    </div>
+    <div style="background:#fff;border:1px solid rgba(23,24,26,.07);border-radius:18px;padding:24px 26px 26px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2;margin-bottom:16px">Система</div>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div style="display:flex;align-items:baseline;gap:10px"><span style="font-size:13px;color:#9b9da2;width:84px;flex:none">Шрифты</span><span style="font-size:13.5px">Golos Text, JetBrains Mono</span></div>
+        <div style="display:flex;align-items:baseline;gap:10px"><span style="font-size:13px;color:#9b9da2;width:84px;flex:none">Холст</span><span style="font-family:'JetBrains Mono',monospace;font-size:13px">#efedea</span></div>
+        <div style="display:flex;align-items:baseline;gap:10px"><span style="font-size:13px;color:#9b9da2;width:84px;flex:none">Чернила</span><span style="font-family:'JetBrains Mono',monospace;font-size:13px">#17181a</span></div>
+        <div style="display:flex;align-items:baseline;gap:10px"><span style="font-size:13px;color:#9b9da2;width:84px;flex:none">Статусы</span><span style="font-size:13.5px">✓ ◷ △ ✕</span></div>
+        <div style="display:flex;align-items:baseline;gap:10px"><span style="font-size:13px;color:#9b9da2;width:84px;flex:none">Минимум</span><span style="font-family:'JetBrains Mono',monospace;font-size:13px">1440 px</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#eceae7;border:1px solid rgba(23,24,26,.05);border-radius:18px;padding:24px 26px 26px">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2;margin-bottom:14px">Не сделано</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+      <div style="font-size:13.5px;line-height:1.55;color:#4a4c51">Карточка события с Timeline по сценам — центральный экран по документам</div>
+      <div style="font-size:13.5px;line-height:1.55;color:#4a4c51">Корзина, создание события, площадки, статистика и учёт</div>
+      <div style="font-size:13.5px;line-height:1.55;color:#4a4c51">Интерактив: переключение состояний, панели, drag состава команды</div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0}
+body{background:#efedea;color:#17181a;font-family:'Golos Text',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;min-width:1440px}
+a{color:#17181a;text-decoration:none}
+a:hover{color:#5a5c61}
+::selection{background:#17181a;color:#fff}
+</style>
+</helmet>
+<div style="display:flex;min-height:100vh;align-items:stretch">
+
+  <aside style="width:238px;flex:none;background:#e8e5e1;border-right:1px solid rgba(23,24,26,.07);display:flex;flex-direction:column;padding:22px 16px 18px">
+    <div style="display:flex;align-items:center;gap:11px;padding:0 8px 24px">
+      <div style="width:30px;height:30px;border-radius:9px;background:#17181a;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;font-weight:600;letter-spacing:-.02em">D</div>
+      <div>
+        <div style="font-size:15.5px;font-weight:600;letter-spacing:-.01em;line-height:1.1">Dreams</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2;margin-top:2px">агентство</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:1px">
+      <a href="Рабочий стол.dc.html" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:10px;font-size:14px;color:#4a4c51" style-hover="background:rgba(23,24,26,.055)"><span>Рабочий стол</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:oklch(.55 .13 72)">5</span></a>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:10px;background:#17181a;color:#fff;font-size:14px;font-weight:500"><span>Календарь</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8a8c92">3 сегодня</span></div>
+      <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:10px;font-size:14px;color:#4a4c51" style-hover="background:rgba(23,24,26,.055)"><span>События</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">41</span></a>
+      <a href="Специалисты.dc.html" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:10px;font-size:14px;color:#4a4c51" style-hover="background:rgba(23,24,26,.055)"><span>Специалисты</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">128</span></a>
+      <a href="Команды.dc.html" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:10px;font-size:14px;color:#4a4c51" style-hover="background:rgba(23,24,26,.055)"><span>Команды</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">6</span></a>
+      <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:10px;font-size:14px;color:#4a4c51" style-hover="background:rgba(23,24,26,.055)"><span>Площадки</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">37</span></a>
+      <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:10px;font-size:14px;color:#4a4c51" style-hover="background:rgba(23,24,26,.055)"><span>Документы</span></a>
+      <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:10px;font-size:14px;color:#4a4c51" style-hover="background:rgba(23,24,26,.055)"><span>Статистика и учёт</span></a>
+    </div>
+
+    <div style="height:1px;background:rgba(23,24,26,.09);margin:18px 8px"></div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#9b9da2;padding:0 12px 10px">Цеха</div>
+    <div style="display:flex;flex-direction:column;gap:1px">
+      <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;border-radius:9px;font-size:13.5px;color:#4a4c51" style-hover="background:rgba(23,24,26,.055)"><span>Управление</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#b3b5b9">9</span></a>
+      <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;border-radius:9px;font-size:13.5px;color:#4a4c51" style-hover="background:rgba(23,24,26,.055)"><span>Съёмка</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#b3b5b9">34</span></a>
+      <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;border-radius:9px;font-size:13.5px;color:#4a4c51" style-hover="background:rgba(23,24,26,.055)"><span>Программа</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#b3b5b9">21</span></a>
+      <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;border-radius:9px;font-size:13.5px;color:#4a4c51" style-hover="background:rgba(23,24,26,.055)"><span>Образ</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#b3b5b9">18</span></a>
+      <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;border-radius:9px;font-size:13.5px;color:#4a4c51" style-hover="background:rgba(23,24,26,.055)"><span>Оформление и стол</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#b3b5b9">31</span></a>
+      <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;border-radius:9px;font-size:13.5px;color:#4a4c51" style-hover="background:rgba(23,24,26,.055)"><span>Логистика</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#b3b5b9">15</span></a>
+    </div>
+
+    <div style="flex:1;min-height:24px"></div>
+
+    <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:10px;font-size:14px;color:#4a4c51" style-hover="background:rgba(23,24,26,.055)"><span>Настройки</span></a>
+    <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:10px;font-size:14px;color:#4a4c51;margin-bottom:12px" style-hover="background:rgba(23,24,26,.055)"><span>Корзина</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">3</span></a>
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.6)">
+      <div style="width:32px;height:32px;flex:none;border-radius:50%;background:#d8d4ce;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#5a5c61">АС</div>
+      <div style="min-width:0">
+        <div style="font-size:13.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Анна Соколова</div>
+        <div style="font-size:11.5px;color:#9b9da2">Организатор</div>
+      </div>
+    </div>
+  </aside>
+
+  <main style="flex:1;min-width:0;padding:22px 26px 40px">
+
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px">
+      <div>
+        <h1 style="margin:0;font-size:23px;font-weight:600;letter-spacing:-.02em;line-height:1.15">Календарь</h1>
+        <div style="font-size:13px;color:#6e7075;margin-top:3px">16 событий в сентябре · 6 суббот заняты · <span style="color:oklch(.55 .13 72)">1 пересечение команд</span></div>
+      </div>
+      <div style="flex:1"></div>
+      <div style="display:flex;align-items:center;gap:2px;background:#fff;border:1px solid rgba(23,24,26,.08);border-radius:11px;padding:3px">
+        <span style="font-size:13px;padding:6px 13px;border-radius:8px;background:#17181a;color:#fff;font-weight:500">Месяц</span>
+        <a href="#" style="font-size:13px;padding:6px 13px;border-radius:8px;color:#6e7075" style-hover="background:#f4f2ef;color:#17181a">Неделя</a>
+        <a href="#" style="font-size:13px;padding:6px 13px;border-radius:8px;color:#6e7075" style-hover="background:#f4f2ef;color:#17181a">Сезон</a>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid rgba(23,24,26,.08);border-radius:11px;padding:7px 10px">
+        <a href="#" style="width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#6e7075" style-hover="background:#f4f2ef;color:#17181a">‹</a>
+        <span style="font-size:13.5px;font-weight:500;min-width:118px;text-align:center">Сентябрь 2026</span>
+        <a href="#" style="width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#6e7075" style-hover="background:#f4f2ef;color:#17181a">›</a>
+      </div>
+      <a href="#" style="display:flex;align-items:center;background:#fff;border:1px solid rgba(23,24,26,.08);border-radius:11px;padding:9px 14px;font-size:13.5px;color:#4a4c51" style-hover="border-color:rgba(23,24,26,.25);color:#17181a">Настройки</a>
+      <a href="#" style="background:#17181a;color:#fff;border-radius:11px;padding:10px 17px;font-size:13.5px;font-weight:500" style-hover="background:#2e3035;color:#fff">Новое событие</a>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 372px;gap:14px;align-items:start">
+
+      <div style="background:#fff;border:1px solid rgba(23,24,26,.07);border-radius:18px;overflow:hidden;min-width:0">
+
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid rgba(23,24,26,.09)">
+          <div style="padding:11px 10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#9b9da2">Пн</div>
+          <div style="padding:11px 10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#9b9da2">Вт</div>
+          <div style="padding:11px 10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#9b9da2">Ср</div>
+          <div style="padding:11px 10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#9b9da2">Чт</div>
+          <div style="padding:11px 10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#9b9da2">Пт</div>
+          <div style="padding:11px 10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#6e7075;background:#faf9f7">Сб</div>
+          <div style="padding:11px 10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#6e7075;background:#faf9f7">Вс</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(7,1fr)">
+
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px;background:#faf9f7">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#c2c4c8;margin-bottom:7px">31</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9b9da2;margin-bottom:7px">1</div>
+            <sc-if value="{{ showPast }}" hint-placeholder-val="{{ true }}">
+              <div style="border:1px solid rgba(23,24,26,.08);border-radius:7px;padding:5px 7px;display:flex;align-items:baseline;gap:6px;min-width:0">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#b3b5b9;flex:none">14:00</span>
+                <span style="font-size:11.5px;color:#9b9da2;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Кац + Верн</span>
+              </div>
+            </sc-if>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9b9da2;margin-bottom:7px">2</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9b9da2;margin-bottom:7px">3</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px;background:#f4f2ef">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+              <span style="width:20px;height:20px;border-radius:50%;background:#17181a;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px">4</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#6e7075">3</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <div style="background:#17181a;border-radius:7px;padding:5px 7px;display:flex;align-items:baseline;gap:6px;min-width:0">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#8a8c92;flex:none">10:00</span>
+                <span style="font-size:11.5px;color:#fff;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Иванов + Петрова</span>
+              </div>
+              <div style="background:#17181a;border-radius:7px;padding:5px 7px;display:flex;align-items:baseline;gap:6px;min-width:0">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#8a8c92;flex:none">13:00</span>
+                <span style="font-size:11.5px;color:#fff;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Соколов + Ляхова</span>
+              </div>
+              <div style="background:#17181a;border-radius:7px;padding:5px 7px;display:flex;align-items:baseline;gap:6px;min-width:0">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#8a8c92;flex:none">12:00</span>
+                <span style="font-size:11.5px;color:#fff;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Гурьев + Насырова</span>
+              </div>
+            </div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px;background:#faf9f7">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:12px">5</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#b3b5b9">2</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <div style="background:#f2f0ed;border-radius:7px;padding:5px 7px;display:flex;align-items:baseline;gap:6px;min-width:0">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9b9da2;flex:none">12:00</span>
+                <span style="font-size:11.5px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Верес + Лян</span>
+              </div>
+              <div style="background:#f2f0ed;border-radius:7px;padding:5px 7px;display:flex;align-items:baseline;gap:6px;min-width:0">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9b9da2;flex:none">16:00</span>
+                <span style="font-size:11.5px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Шмидт + Ора</span>
+              </div>
+            </div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px;background:#faf9f7">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">6</div>
+            <div style="background:#f2f0ed;border-radius:7px;padding:5px 7px;display:flex;align-items:baseline;gap:6px;min-width:0">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9b9da2;flex:none">15:00</span>
+              <span style="font-size:11.5px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Ткач + Роде</span>
+            </div>
+          </div>
+
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">7</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">8</div>
+            <div style="background:#f2f0ed;border-radius:7px;padding:5px 7px;min-width:0">
+              <div style="display:flex;align-items:baseline;gap:6px;min-width:0">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9b9da2;flex:none">14:00</span>
+                <span style="font-size:11.5px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Романов + Штейн</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:5px;margin-top:4px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:oklch(.55 .13 72)">△</span>
+                <span style="font-size:10.5px;color:#6e7075">остаток не оплачен</span>
+              </div>
+            </div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">9</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">10</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">11</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px;background:#faf9f7">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:12px">12</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:oklch(.55 .13 72)">3</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <div style="background:#f2f0ed;border-radius:7px;padding:5px 7px;display:flex;align-items:baseline;gap:6px;min-width:0">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9b9da2;flex:none">11:00</span>
+                <span style="font-size:11.5px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Панов + Ирс</span>
+              </div>
+              <div style="background:#f2f0ed;border-radius:7px;padding:5px 7px;display:flex;align-items:baseline;gap:6px;min-width:0">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9b9da2;flex:none">14:00</span>
+                <span style="font-size:11.5px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Лаврова + Тим</span>
+              </div>
+              <div style="background:#f2f0ed;border-radius:7px;padding:5px 7px;display:flex;align-items:baseline;gap:6px;min-width:0">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9b9da2;flex:none">17:00</span>
+                <span style="font-size:11.5px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Хан + Соло</span>
+              </div>
+              <sc-if value="{{ showConflicts }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;align-items:center;gap:5px;padding:4px 7px;border-radius:7px;background:#faf7f2;border:1px solid oklch(.85 .07 78)">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:oklch(.55 .13 72);flex:none">△</span>
+                  <span style="font-size:10.5px;color:#4a4c51;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">«Съёмка А» на трёх</span>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px;background:#faf9f7">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">13</div>
+            <div style="background:#f2f0ed;border-radius:7px;padding:5px 7px;min-width:0">
+              <div style="display:flex;align-items:baseline;gap:6px;min-width:0">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9b9da2;flex:none">13:00</span>
+                <span style="font-size:11.5px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Кузнецов + Ким</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:5px;margin-top:4px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:oklch(.52 .17 25)">✕</span>
+                <span style="font-size:10.5px;color:#6e7075">нет кондитера</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">14</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">15</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">16</div>
+            <div style="background:#f2f0ed;border-radius:7px;padding:5px 7px;display:flex;align-items:baseline;gap:6px;min-width:0">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9b9da2;flex:none">17:00</span>
+              <span style="font-size:11.5px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Юсуф + Дан</span>
+            </div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">17</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">18</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px;background:#faf9f7">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:12px">19</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#b3b5b9">2</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <div style="background:#f2f0ed;border-radius:7px;padding:5px 7px;display:flex;align-items:baseline;gap:6px;min-width:0">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9b9da2;flex:none">13:00</span>
+                <span style="font-size:11.5px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Дорохов + Ясь</span>
+              </div>
+              <div style="background:#f2f0ed;border-radius:7px;padding:5px 7px;display:flex;align-items:baseline;gap:6px;min-width:0">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9b9da2;flex:none">16:00</span>
+                <span style="font-size:11.5px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Мороз + Кит</span>
+              </div>
+            </div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px;background:#faf9f7">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">20</div>
+            <div style="background:#f2f0ed;border-radius:7px;padding:5px 7px;display:flex;align-items:baseline;gap:6px;min-width:0">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9b9da2;flex:none">14:00</span>
+              <span style="font-size:11.5px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Гросс + Ая</span>
+            </div>
+          </div>
+
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">21</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">22</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">23</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">24</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">25</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px;background:#faf9f7">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">26</div>
+            <div style="border:1px dashed rgba(23,24,26,.2);border-radius:7px;padding:5px 7px;min-width:0;background:#fff">
+              <div style="display:flex;align-items:baseline;gap:6px;min-width:0">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9b9da2;flex:none">15:00</span>
+                <span style="font-size:11.5px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Ефимов + Гай</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:5px;margin-top:4px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9b9da2">◷</span>
+                <span style="font-size:10.5px;color:#6e7075">команда 5 из 14</span>
+              </div>
+            </div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);border-bottom:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px;background:#faf9f7">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">27</div>
+            <div style="background:#f2f0ed;border-radius:7px;padding:5px 7px;display:flex;align-items:baseline;gap:6px;min-width:0">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9b9da2;flex:none">13:00</span>
+              <span style="font-size:11.5px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Балан + Ре</span>
+            </div>
+          </div>
+
+          <div style="border-right:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">28</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">29</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px">30</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#c2c4c8;margin-bottom:7px">1</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#c2c4c8;margin-bottom:7px">2</div>
+          </div>
+          <div style="border-right:1px solid rgba(23,24,26,.06);padding:8px 9px 10px;min-height:122px;background:#faf9f7">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#c2c4c8">3</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#c2c4c8">2</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <div style="background:#f4f2ef;border-radius:7px;padding:5px 7px;display:flex;align-items:baseline;gap:6px;min-width:0">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#b3b5b9;flex:none">12:00</span>
+                <span style="font-size:11.5px;color:#6e7075;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Савельев + Пак</span>
+              </div>
+              <div style="background:#f4f2ef;border-radius:7px;padding:5px 7px;display:flex;align-items:baseline;gap:6px;min-width:0">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#b3b5b9;flex:none">16:00</span>
+                <span style="font-size:11.5px;color:#6e7075;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Титов + Раева</span>
+              </div>
+            </div>
+          </div>
+          <div style="padding:8px 9px 10px;min-height:122px;background:#faf9f7">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#c2c4c8;margin-bottom:7px">4</div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:18px;padding:14px 20px;border-top:1px solid rgba(23,24,26,.09);flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:22px;height:12px;border-radius:4px;background:#17181a"></span><span style="font-size:12px;color:#6e7075">идёт сейчас</span></div>
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:22px;height:12px;border-radius:4px;background:#f2f0ed"></span><span style="font-size:12px;color:#6e7075">подготовка</span></div>
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:22px;height:12px;border-radius:4px;border:1px dashed rgba(23,24,26,.2);background:#fff"></span><span style="font-size:12px;color:#6e7075">команда неполная</span></div>
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:22px;height:12px;border-radius:4px;border:1px solid rgba(23,24,26,.08)"></span><span style="font-size:12px;color:#6e7075">прошедшее</span></div>
+          <span style="flex:1"></span>
+          <span style="font-size:12px;color:#9b9da2">суббота и воскресенье выделены — 82 % событий сезона</span>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+
+        <div style="background:#fff;border:1px solid rgba(23,24,26,.07);border-radius:18px;padding:20px 20px 20px">
+          <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:3px">
+            <span style="font-size:17px;font-weight:600;letter-spacing:-.015em">Пятница, 4 сентября</span>
+          </div>
+          <div style="font-size:12.5px;color:#9b9da2;margin-bottom:18px">3 события идут одновременно · <span style="font-family:'JetBrains Mono',monospace">14:26</span></div>
+
+          <div style="display:flex;gap:9px;margin-bottom:9px">
+            <span style="width:0;flex:none"></span>
+            <div style="flex:1;display:flex;justify-content:space-between">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#b3b5b9">09</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#b3b5b9">12</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#b3b5b9">15</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#b3b5b9">18</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#b3b5b9">21</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#b3b5b9">24</span>
+            </div>
+          </div>
+
+          <div style="position:relative;padding-bottom:6px">
+            <div style="position:absolute;left:36.2%;top:0;bottom:6px;width:1px;background:#17181a;z-index:2"></div>
+
+            <div style="margin-bottom:16px">
+              <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:6px">
+                <span style="font-size:14px;font-weight:600;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Иванов + Петрова</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2;flex:none">12 чел.</span>
+              </div>
+              <div style="position:relative;height:22px;background:#f7f5f2;border-radius:6px;overflow:hidden">
+                <div style="position:absolute;left:6.7%;width:86.7%;height:100%;display:flex;gap:1px">
+                  <div style="width:15.4%;background:#e2dfda"></div>
+                  <div style="width:11.5%;background:#e2dfda"></div>
+                  <div style="width:15.4%;background:#17181a"></div>
+                  <div style="width:3.8%;background:#e2dfda"></div>
+                  <div style="width:53.8%;background:#e2dfda"></div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:7px;margin-top:6px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:oklch(.55 .13 72)">△</span>
+                <span style="font-size:12.5px;color:#4a4c51">Фотосессия · Зимний сад</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">до 15:30</span>
+              </div>
+            </div>
+
+            <div style="margin-bottom:16px">
+              <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:6px">
+                <span style="font-size:14px;font-weight:600;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Соколов + Ляхова</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2;flex:none">16 чел.</span>
+              </div>
+              <div style="position:relative;height:22px;background:#f7f5f2;border-radius:6px;overflow:hidden">
+                <div style="position:absolute;left:26.7%;width:73.3%;height:100%;display:flex;gap:1px">
+                  <div style="width:18.2%;background:#17181a"></div>
+                  <div style="width:13.6%;background:#e2dfda"></div>
+                  <div style="width:13.6%;background:#e2dfda"></div>
+                  <div style="width:54.5%;background:#e2dfda"></div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:7px;margin-top:6px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">●</span>
+                <span style="font-size:12.5px;color:#4a4c51">Сборы · Отель «Метрополь»</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">до 15:00</span>
+              </div>
+            </div>
+
+            <div>
+              <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:6px">
+                <span style="font-size:14px;font-weight:600;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Гурьев + Насырова</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2;flex:none">13 чел.</span>
+              </div>
+              <div style="position:relative;height:22px;background:#f7f5f2;border-radius:6px;overflow:hidden">
+                <div style="position:absolute;left:20%;width:66.7%;height:100%;display:flex;gap:1px">
+                  <div style="width:10%;background:#e2dfda"></div>
+                  <div style="width:20%;background:#17181a"></div>
+                  <div style="width:50%;background:#e2dfda"></div>
+                  <div style="width:20%;background:#e2dfda"></div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:7px;margin-top:6px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">●</span>
+                <span style="font-size:12.5px;color:#4a4c51">Прогулка · Парк «Пруды»</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9b9da2">до 15:00</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:9px;margin-top:20px">
+            <a href="#" style="flex:1;text-align:center;font-size:13px;font-weight:500;padding:10px 0;border-radius:10px;background:#17181a;color:#fff" style-hover="background:#2e3035;color:#fff">Открыть день</a>
+            <a href="#" style="flex:none;text-align:center;font-size:13px;font-weight:500;padding:10px 15px;border-radius:10px;border:1px solid rgba(23,24,26,.14);color:#17181a" style-hover="background:#f4f2ef;color:#17181a">Navigator</a>
+          </div>
+        </div>
+
+        <div style="background:#fff;border:1px solid rgba(23,24,26,.07);border-radius:18px;padding:20px 20px 18px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#9b9da2;margin-bottom:15px">Сентябрь</div>
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <div style="display:flex;align-items:center;gap:12px">
+              <span style="font-size:13.5px;color:#4a4c51;flex:1">Событий</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:500">16</span>
+            </div>
+            <div style="height:1px;background:rgba(23,24,26,.06)"></div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <span style="font-size:13.5px;color:#4a4c51;flex:1">Суббот занято</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:500">4 из 4</span>
+            </div>
+            <div style="height:1px;background:rgba(23,24,26,.06)"></div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <span style="font-size:13.5px;color:#4a4c51;flex:1">Дней с двумя и более</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:500">5</span>
+            </div>
+            <div style="height:1px;background:rgba(23,24,26,.06)"></div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <span style="font-size:13.5px;color:#4a4c51;flex:1">Свободных выходных</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:500;color:#9b9da2">2</span>
+            </div>
+          </div>
+        </div>
+
+        <sc-if value="{{ showConflicts }}" hint-placeholder-val="{{ true }}">
+          <div style="background:#faf7f2;border:1px solid oklch(.85 .07 78);border-radius:18px;padding:18px 20px 18px">
+            <div style="display:flex;align-items:flex-start;gap:11px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:oklch(.55 .13 72);flex:none;line-height:1.4">△</span>
+              <div style="flex:1">
+                <div style="font-size:14px;font-weight:600;margin-bottom:4px">12 сентября — три события</div>
+                <div style="font-size:12.5px;line-height:1.5;color:#4a4c51;margin-bottom:12px">Команда «Съёмка А» стоит на всех трёх. Нужно разделить состав или позвать второго фотографа.</div>
+                <div style="display:flex;align-items:center;gap:14px">
+                  <a href="Команды.dc.html" style="font-size:12.5px;font-weight:500" style-hover="color:#5a5c61">Разделить команду</a>
+                  <a href="Специалисты.dc.html" style="font-size:12.5px;color:#6e7075" style-hover="color:#17181a">Найти фотографа</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showPast&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Сетка&quot;,&quot;label&quot;:&quot;Показывать прошедшие события&quot;},&quot;showConflicts&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Сетка&quot;,&quot;label&quot;:&quot;Предупреждать о пересечении команд&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      showPast: this.props.showPast ?? true,
+      showConflicts: this.props.showConflicts ?? true,
+    };
+  }
+}
+</script>
+</body>
+</html>
