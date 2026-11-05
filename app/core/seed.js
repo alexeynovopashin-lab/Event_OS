@@ -5,6 +5,7 @@
 
 import { Graph } from "./graph.js";
 import { appId } from "./id.js";
+import { PlaceRegistry, VERIFICATION, placeRef } from "./registry.js";
 
 export function seedDemoProject() {
   const graph = new Graph("demo-smith-wedding");
@@ -72,24 +73,51 @@ export function seedDemoProject() {
   graph.addEdge("PRECEDES", "scene-ceremony", "scene-photosession");
   graph.addEdge("PRECEDES", "scene-photosession", "scene-reception");
 
-  // Участник из справочника, а не по инвайту (BRIDGE_LIGHT_PLAN.md §9):
-  // ресторан существовал в каталоге площадок до этого проекта. Адресуется
-  // собственным номером зала (appId(phone, "place")), а не личным ID
-  // администратора на смене — тот лишь держатель ключа при этом адресе.
-  // Ни INVITED_BY, ни DEPENDS_ON к person-organizer нет — попадание в
-  // проект не через приглашение.
+  // Участник из справочника, а не по инвайту (BRIDGE_LIGHT_PLAN.md §9, §13):
+  // ресторан существовал в реестре мест до этого проекта. Место адресуется
+  // номером из реестра (core/registry.js), а не телефоном: в графе лежит
+  // только ссылка PlaceRef — номер и название на день записи. Администратор
+  // на смене — человек со своим ID по номеру телефона (appId), он лишь держит
+  // ключ при этом месте. Ни INVITED_BY, ни DEPENDS_ON к person-organizer нет —
+  // попадание в проект не через приглашение.
+  const registry = seedPlaceRegistry();
+  const venueId = registry.find("Терраса")[0];
+  const venueRef = placeRef(registry, venueId, SEED_DATE);
+  graph.addNode(venueRef);
+  graph.addEdge("LOCATED_AT", "scene-reception", venueRef.id);
+
   const venuePhone = "79161234567"; // уже нормализован (telFull() — в Light Plan)
-  const venueId = appId(venuePhone, "place");
+  const managerId = appId(venuePhone, "person");
   graph.addNode({
-    id: venueId,
+    id: managerId,
     type: "Person",
     name: "Ресторан «Терраса», администратор",
     role: "venue_manager",
     joinedVia: "catalogue",
   });
-  graph.addEdge("ASSIGNED_TO", venueId, "scene-reception");
+  graph.addEdge("ASSIGNED_TO", managerId, "scene-reception");
 
   return graph;
+}
+
+// Демонстрационный реестр мест: ресторан «Терраса» уже есть в справочнике.
+// Реестр живёт отдельно от графа проекта (16_Place_Registry.md).
+const SEED_DATE = "2026-11-05";
+
+export function seedPlaceRegistry() {
+  const registry = new PlaceRegistry();
+  const place = registry.issue(
+    {
+      name: "Ресторан «Терраса»",
+      address: "Демо-адрес, 1",
+      city: "Томск",
+      timezone: "Asia/Tomsk",
+      verification: VERIFICATION.HUMAN,
+    },
+    "2026-01-01"
+  );
+  registry.addHall(place.placeId, { name: "Основной зал" }, "2026-01-01");
+  return registry;
 }
 
 // Демонстрационный Change: дождь переносит фотосессию (см. 54_Changes.md §37)
