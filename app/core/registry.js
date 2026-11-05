@@ -83,12 +83,12 @@ export class PlaceRegistry {
   // Номер = «pl» + число из счётчика. Не связан ни с телефоном, ни с названием.
   issue(data, since) {
     requireDate(since);
-    if (!data?.name || !data?.address) throw new Error("для места нужны name и address");
+    if (!data?.name || typeof data.address !== "string") throw new Error("для места нужны name и address (адрес может быть пустым: «не найден при сборе»)");
     const placeId = "pl" + this.next++;
     const place = {
       placeId,
       names: [{ from: since, to: null, value: data.name }],
-      addresses: [{ from: since, to: null, value: data.address }],
+      addresses: data.address ? [{ from: since, to: null, value: data.address }] : [], // пусто = адрес не найден
       city: data.city ?? null,
       timezone: data.timezone ?? null,
       operatorPeriods: [],
@@ -100,6 +100,7 @@ export class PlaceRegistry {
       catalog: { state: data.catalog ?? CATALOG.NOT_CONNECTED, since },
       verification: data.verification ?? VERIFICATION.SCRAPED,
       note: data.note ?? null,
+      hallsCount: data.hallsCount ?? null, // залов известно сколько, а названий нет (сбор)
       links: [],
       updatedAt: since,
     };
@@ -461,6 +462,7 @@ export class PlaceRegistry {
       updatedAt: place.updatedAt,
     };
     if (place.note) view.note = place.note;
+    if (place.hallsCount) view.hallsCount = place.hallsCount;
     return view;
   }
 }
