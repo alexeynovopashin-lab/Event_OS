@@ -20,6 +20,8 @@
 
 14_Navigator.md
 
+16_Place_Registry.md
+
 20_Workspaces.md
 
 21_Projects.md
