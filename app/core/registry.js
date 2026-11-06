@@ -146,7 +146,7 @@ export class PlaceRegistry {
     requireDate(since);
     const place = this._get(id);
     startPeriod(place.contactPhone, phone, since);
-    this._touch(place, since);
+    this.rev++; // телефон в отдаваемый файл не идёт: updatedAt места не меняем
     return place;
   }
 

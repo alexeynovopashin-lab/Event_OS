@@ -148,6 +148,25 @@ export function importCatalog(registry, lists, { date }) {
 // Связь с местом — по внешнему ключу в aliases. Номера никуда не печатаются:
 // возвращаются только счётчики. Номер попадает только в contactPhone закрытого реестра
 // (в отдаваемый файл он не идёт) и ключом места не служит.
+// Три вида файлов телефонов: {phones:{ключ: "номер"}} (ключ без префикса = id BroniOS),
+// {cities:{город:{phones:{ключ:{phone,…}}}}} и {phones:{ключ:{phone,…}}}. Возвращает пары [внешний ключ, номер].
+export function flattenPhones(map) {
+  const out = [];
+  const take = (phones) => {
+    for (const [key, value] of Object.entries(phones ?? {})) {
+      const ext = key.includes(":") ? key : `bronios:${key}`;
+      if (!/^(studiogo|2gis|gorko|bronios):/.test(ext)) continue;
+      out.push([ext, value && typeof value === "object" ? value.phone : value]);
+    }
+  };
+  if (map?.cities && typeof map.cities === "object") {
+    for (const city of Object.values(map.cities)) take(city?.phones);
+  } else {
+    take(map?.phones ?? map);
+  }
+  return out;
+}
+
 export function applyPhones(registry, phoneMaps, { date }) {
   const byAlias = new Map();
   for (const p of registry.places.values()) for (const a of p.aliases) {
@@ -157,9 +176,7 @@ export function applyPhones(registry, phoneMaps, { date }) {
   const stats = { keys: 0, unmatchedKeys: 0, skippedValues: 0, placesWithPhone: 0, changed: 0, sharedGroups: 0 };
   const forPlace = new Map();
   for (const map of phoneMaps) {
-    const phones = map && typeof map.phones === "object" && map.phones ? map.phones : map;
-    for (const [key, value] of Object.entries(phones ?? {})) {
-      if (!/^(studiogo|2gis|gorko|bronios):/.test(key)) continue;
+    for (const [key, value] of flattenPhones(map)) {
       stats.keys++;
       if (typeof value !== "string" || !value.trim()) { stats.skippedValues++; continue; }
       const ids = byAlias.get(key);

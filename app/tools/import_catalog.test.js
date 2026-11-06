@@ -155,10 +155,12 @@ test("телефоны: связываются по внешнему ключу,
     [
       { phones: { "studiogo:1": FAKE, "studiogo:2": FAKE, "studiogo:999": "+79990002222", "studiogo:3": null }, notFound: [] },
       { "2gis:555": "+79990003333" },
+      { cities: { kazan: { phones: { "studiogo:1": { name: "Свет", phone: FAKE } } } } },
+      { phones: { mystudio: "+79990004444" } },
     ],
     { date: "2026-11-06" }
   );
-  assert.equal(stats.placesWithPhone, 2);
+  assert.equal(stats.placesWithPhone, 3);
   assert.equal(stats.unmatchedKeys, 2);
   assert.equal(stats.skippedValues, 1);
   assert.equal(stats.sharedGroups, 1, "один номер у двух мест — подсказка, места не склеены");
@@ -167,6 +169,7 @@ test("телефоны: связываются по внешнему ключу,
   assert.equal(svet.contactPhone.at(-1).value, FAKE);
   assert.equal(JSON.stringify(r.servedFile()).includes("99900"), false);
   assert.equal(r.find(FAKE).length, 0, "по телефону место не ищется и не склеивается");
+  assert.equal(svet.updatedAt, "2026-11-04", "телефон не меняет updatedAt места: в отдаваемом файле ничего не изменилось");
   // повторное применение ничего не меняет
   assert.equal(applyPhones(r, [{ phones: { "studiogo:1": FAKE } }], { date: "2026-11-07" }).changed, 0);
 });
