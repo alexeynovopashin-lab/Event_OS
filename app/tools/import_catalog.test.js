@@ -6,7 +6,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import { PlaceRegistry, CATALOG, VERIFICATION, LIFE } from "../core/registry.js";
-import { importCatalog } from "./import_catalog.js";
+import { importCatalog, applyPhones } from "./import_catalog.js";
 
 function lists() {
   return [
@@ -144,4 +144,29 @@ test("в отдаваемом файле нет людей, телефонов, 
     assert.ok(!text.includes(bad), `в файле не должно быть «${bad}»`);
   }
   assert.ok(!/\+?\d[\d\s()-]{9,}\d/.test(text.replace(/pl\d+/g, "").replace(/\d{4}-\d{2}-\d{2}/g, "")), "похожего на телефон нет");
+});
+
+test("телефоны: связываются по внешнему ключу, остаются только в реестре, в отдаваемый файл не идут, ключом не служат", () => {
+  const r = new PlaceRegistry();
+  importCatalog(r, lists(), { date: "2026-11-05" });
+  const FAKE = "+79990001111"; // выдуманный номер
+  const stats = applyPhones(
+    r,
+    [
+      { phones: { "studiogo:1": FAKE, "studiogo:2": FAKE, "studiogo:999": "+79990002222", "studiogo:3": null }, notFound: [] },
+      { "2gis:555": "+79990003333" },
+    ],
+    { date: "2026-11-06" }
+  );
+  assert.equal(stats.placesWithPhone, 2);
+  assert.equal(stats.unmatchedKeys, 2);
+  assert.equal(stats.skippedValues, 1);
+  assert.equal(stats.sharedGroups, 1, "один номер у двух мест — подсказка, места не склеены");
+  assert.equal(JSON.stringify(stats).includes("99900"), false, "номера в отчёт не попадают");
+  const svet = [...r.places.values()].find((p) => p.names[0].value === "Свет");
+  assert.equal(svet.contactPhone.at(-1).value, FAKE);
+  assert.equal(JSON.stringify(r.servedFile()).includes("99900"), false);
+  assert.equal(r.find(FAKE).length, 0, "по телефону место не ищется и не склеивается");
+  // повторное применение ничего не меняет
+  assert.equal(applyPhones(r, [{ phones: { "studiogo:1": FAKE } }], { date: "2026-11-07" }).changed, 0);
 });

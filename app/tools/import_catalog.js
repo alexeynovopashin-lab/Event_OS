@@ -8,7 +8,8 @@
 //
 // Запуск из папки app/:
 //   node tools/import_catalog.js --from <папка с json каталога> --out <папка вывода>
-//        [--registry <registry.json прошлого запуска>] [--date ГГГГ-ММ-ДД]
+//        [--registry <registry.json прошлого запуска>] [--phones <файл1,файл2,…>]
+//   --phones: файлы с телефонами вне репозитория; номера пишутся только в registry.json.
 //
 // Повторный запуск с --registry ничего не выдаёт заново: место находится по
 // внешнему ключу (studiogo:/2gis:/gorko:/bronios:) и только обновляется.
@@ -143,6 +144,44 @@ export function importCatalog(registry, lists, { date }) {
   return stats;
 }
 
+// Телефоны: файлы вида {"phones": {"studiogo:<ID>": "+7…"}, …} лежат ВНЕ репозитория.
+// Связь с местом — по внешнему ключу в aliases. Номера никуда не печатаются:
+// возвращаются только счётчики. Номер попадает только в contactPhone закрытого реестра
+// (в отдаваемый файл он не идёт) и ключом места не служит.
+export function applyPhones(registry, phoneMaps, { date }) {
+  const byAlias = new Map();
+  for (const p of registry.places.values()) for (const a of p.aliases) {
+    if (!byAlias.has(a)) byAlias.set(a, []);
+    byAlias.get(a).push(p.placeId);
+  }
+  const stats = { keys: 0, unmatchedKeys: 0, skippedValues: 0, placesWithPhone: 0, changed: 0, sharedGroups: 0 };
+  const forPlace = new Map();
+  for (const map of phoneMaps) {
+    const phones = map && typeof map.phones === "object" && map.phones ? map.phones : map;
+    for (const [key, value] of Object.entries(phones ?? {})) {
+      if (!/^(studiogo|2gis|gorko|bronios):/.test(key)) continue;
+      stats.keys++;
+      if (typeof value !== "string" || !value.trim()) { stats.skippedValues++; continue; }
+      const ids = byAlias.get(key);
+      if (!ids) { stats.unmatchedKeys++; continue; }
+      for (const id of ids) if (!forPlace.has(id)) forPlace.set(id, value.trim());
+    }
+  }
+  const owners = new Map();
+  for (const [id, phone] of forPlace) {
+    const place = registry.places.get(id);
+    const open = place.contactPhone[place.contactPhone.length - 1];
+    if (!open || open.to !== null || open.value !== phone) {
+      registry.setContactPhone(id, phone, date);
+      stats.changed++;
+    }
+    owners.set(phone, (owners.get(phone) ?? 0) + 1);
+  }
+  stats.placesWithPhone = forPlace.size;
+  stats.sharedGroups = [...owners.values()].filter((n) => n > 1).length; // один номер у нескольких мест: только подсказка, не склейка
+  return stats;
+}
+
 function main(argv) {
   const arg = (name) => {
     const i = argv.indexOf(`--${name}`);
@@ -158,6 +197,11 @@ function main(argv) {
   const prev = arg("registry");
   const registry = prev ? PlaceRegistry.fromJSON(JSON.parse(fs.readFileSync(prev, "utf8"))) : new PlaceRegistry();
   const stats = importCatalog(registry, readCatalogFiles(from), { date });
+  const phoneFiles = (arg("phones") ?? "").split(",").filter(Boolean);
+  if (phoneFiles.length) {
+    const maps = phoneFiles.map((f) => JSON.parse(fs.readFileSync(f, "utf8")));
+    stats.phones = applyPhones(registry, maps, { date });
+  }
 
   fs.mkdirSync(out, { recursive: true });
   fs.writeFileSync(path.join(out, "registry.json"), JSON.stringify(registry.toJSON(), null, 1) + "\n");
