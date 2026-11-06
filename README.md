@@ -22,6 +22,8 @@
 
 16_Place_Registry.md
 
+15_Core_Modules.md
+
 20_Workspaces.md
 
 21_Projects.md
