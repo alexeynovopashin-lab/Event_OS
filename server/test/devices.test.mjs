@@ -72,9 +72,9 @@ test("пропуск: испорченный и чужой — 401; без за�
   assert.equal((await del(b.pass)).status, 204);
 });
 
-test("health перечисляет только работающие разделы", async () => {
+test("health перечисляет работающие разделы", async () => {
   const { core } = makeCore({ store: createMemoryStore() });
-  assert.deepEqual(parse(await core.handle(req("GET", "/v1/health"))).api, ["devices"]);
+  assert.deepEqual(parse(await core.handle(req("GET", "/v1/health"))).api, ["devices", "avatar"]);
 });
 
 test("DELETE устройства: у ID остались другие устройства — всё общее остаётся", async () => {

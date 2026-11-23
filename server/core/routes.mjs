@@ -3,6 +3,8 @@
 import { json, fail, parseJsonBody } from "./http.mjs";
 import { parseAppId, homeOfCountry } from "./id.mjs";
 import { issue, authenticate, idKey, avatarKey } from "./pass.mjs";
+import { processJpeg } from "./jpeg.mjs";
+import { sha256Hex } from "./util.mjs";
 
 export const RATE_PER_MINUTE = 30; // на один пропуск; счётчик в хранилище
 
@@ -64,6 +66,38 @@ export function buildRoutes(ctx) {
     if (others.length === 0) await store.deleteAvatar(device.avatarKey);
     return { status: 204, headers: { "cache-control": "no-store" }, body: null };
   }));
+
+  // ---- Шаг 2: аватарка (CORE-02) ----
+  api.push("avatar");
+
+  add("PUT", "/v1/me/avatar", authed(async (req, device) => {
+    const r = processJpeg(req.body);
+    if (!r.ok) return fail(r.status, r.error);
+    const old = await store.getAvatar(device.avatarKey);
+    const meta = { version: (old ? old.meta.version : 0) + 1, sha256: await sha256Hex(r.clean), size: r.clean.length, updatedAt: ctx.now() };
+    // Хранилище записывает новую версию и только потом стирает старую («Стирать сразу», Алексей 22.11).
+    await store.putAvatar(device.avatarKey, r.clean, meta);
+    return json(200, { sha256: meta.sha256, size: meta.size });
+  }));
+
+  add("GET", "/v1/me/avatar", authed(async (req, device) => {
+    const a = await store.getAvatar(device.avatarKey);
+    if (!a) return fail(404, "none");
+    const etag = '"' + a.meta.sha256 + '"';
+    const base = { etag, "cache-control": "private, no-cache" };
+    const inm = req.headers["if-none-match"];
+    if (inm && inm.split(",").some((t) => t.trim().replace(/^W\//, "") === etag)) return { status: 304, headers: base, body: null };
+    return { status: 200, headers: { ...base, "content-type": "image/jpeg" }, body: a.bytes };
+  }));
+
+  add("DELETE", "/v1/me/avatar", authed(async (req, device) => {
+    await store.deleteAvatar(device.avatarKey);
+    return { status: 204, headers: { "cache-control": "no-store" }, body: null };
+  }));
+
+  // «Все, кто знает номер» (Алексей 19.11): чужие читают аватарку по ID. ID — в теле, не в адресе.
+  // До CORE-05 (подтверждение номера, после выпуска) этот путь ВСЕГДА отвечает 404, что бы ни пришло.
+  add("POST", "/v1/avatars/lookup", async () => fail(404, "none"));
 
   return routes;
 }
