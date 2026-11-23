@@ -13,10 +13,23 @@ const { Driver, MetadataAuthService, TypedValues, TypedData } = ydb;
 
 export const DEFAULT_ENDPOINT = "grpcs://ydb.serverless.yandexcloud.net:2135";
 
-export async function connectYdb({ endpoint = DEFAULT_ENDPOINT, database }) {
+// tokens — источник токена из ./token.mjs. MetadataAuthService получает его снаружи,
+// поэтому не тянет необязательный пакет @yandex-cloud/nodejs-sdk (его в архиве нет).
+export async function connectYdb({ endpoint = DEFAULT_ENDPOINT, database, tokens }) {
   if (!database) throw new Error("YDB_DATABASE is required");
-  const driver = new Driver({ endpoint, database, authService: new MetadataAuthService() });
-  if (!(await driver.ready(10000))) throw new Error("YDB is not ready");
+  if (!tokens) throw new Error("token source is required");
+  const driver = new Driver({ endpoint, database, authService: new MetadataAuthService(tokens) });
+  let ok = false;
+  try {
+    ok = await driver.ready(10000);
+  } catch (e) {
+    await driver.destroy().catch(() => {});
+    throw e;
+  }
+  if (!ok) {
+    await driver.destroy().catch(() => {});
+    throw new Error("YDB is not ready");
+  }
   return driver;
 }
 

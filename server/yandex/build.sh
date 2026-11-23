@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # Собирает ZIP для загрузки в консоль Yandex Cloud: server/yandex/dist/eventoscore.zip
-# Внутри: index.js, adapter.mjs, store.mjs, core/, node_modules (ydb-sdk). Секретов в архиве нет.
+# Внутри: index.js, adapter.mjs, store.mjs, token.mjs, core/, node_modules (ydb-sdk). Секретов в архиве нет.
 set -euo pipefail
 here="$(cd "$(dirname "$0")" && pwd)"
 out="$here/dist/build"
 rm -rf "$here/dist" && mkdir -p "$out/core"
-cp "$here/index.js" "$here/adapter.mjs" "$here/store.mjs" "$here/package.json" "$out/"
+cp "$here/index.js" "$here/adapter.mjs" "$here/store.mjs" "$here/token.mjs" "$here/package.json" "$out/"
 cp "$here"/../core/*.mjs "$out/core/"
 rm -f "$out/core/memory_store.mjs"   # подложное хранилище в облако не нужно
 (cd "$out" && npm install --omit=dev --no-audit --no-fund --silent)
