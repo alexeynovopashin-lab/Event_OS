@@ -1,0 +1,12 @@
+{
+  "name": "eventos-core-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Сервер ядра Event OS, срез 1: пропуск устройства, аватарка, удаление данных. Общий модуль core/ не знает про облако.",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test \"test/*.test.mjs\"",
+    "dev": "node dev.mjs"
+  }
+}
