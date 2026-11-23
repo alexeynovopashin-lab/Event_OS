@@ -1,0 +1,43 @@
+-- Таблицы сервера ядра (срез 1) в базе YDB `eventos-core`.
+-- Как выполнить: консоль Yandex Cloud → Managed Service for YDB → база eventos-core →
+-- «Навигация» → «Новый SQL-запрос» → вставить ВЕСЬ этот файл → «Выполнить».
+-- В таблицах нет ни номеров телефонов, ни пропусков: только ключи-HMAC и хеш пропуска.
+
+CREATE TABLE devices (
+    deviceId   Utf8,
+    idKey      Utf8,
+    avatarKey  Utf8,
+    passHash   Utf8,
+    country    Utf8,
+    home       Utf8,
+    appVersion Utf8,
+    personName Utf8,
+    createdAt  Int64,
+    PRIMARY KEY (deviceId),
+    INDEX idx_id GLOBAL SYNC ON (idKey)
+);
+
+CREATE TABLE avatars (
+    avatarKey Utf8,
+    ver       Uint32,
+    sha256    Utf8,
+    bytesLen  Uint32,
+    updatedAt Int64,
+    body      String,
+    PRIMARY KEY (avatarKey)
+);
+
+CREATE TABLE moved (
+    fromKey Utf8,
+    toKey   Utf8,
+    movedAt Int64,
+    PRIMARY KEY (fromKey),
+    INDEX idx_to GLOBAL SYNC ON (toKey)
+);
+
+CREATE TABLE rate (
+    deviceId Utf8,
+    minuteNo Int64,
+    n        Int32,
+    PRIMARY KEY (deviceId)
+);
