@@ -34,7 +34,8 @@ register() { # номер → пишет REGCODE, DEV и PASS (без подоб
     -d "{\"app\":\"lightplan\",\"appId\":\"$1\",\"country\":\"RU\",\"appVersion\":\"check\"}")
   DEV=$(field deviceId); PASS=$(field pass)
 }
-auth() { echo "Authorization: Bearer $PASS"; }
+# Пропуск — в X-Core-Pass: Authorization: Bearer шлюз Яндекса принимает за свой IAM-токен и отвечает 403 (измерено 23.11).
+auth() { echo "X-Core-Pass: $PASS"; }
 sha() { if command -v sha256sum >/dev/null; then sha256sum "$1" | cut -d' ' -f1; else shasum -a 256 "$1" | cut -d' ' -f1; fi; }
 
 echo "Шаг 0. Связь"
@@ -51,7 +52,7 @@ echo "Шаг 1. Пропуск устройства"
 register id79130000101; expect "регистрация → 201" "$REGCODE" 201
 [ -n "$PASS" ] && ok "пропуск выдан" || no "пропуск выдан" "пусто"
 GOODPASS="$PASS"; GOODDEV="$DEV"
-c=$(call GET me/avatar -H "Authorization: Bearer ${GOODPASS}x"); expect_err "испорченный пропуск → 401" "$c" 401 bad_pass
+c=$(call GET me/avatar -H "X-Core-Pass: ${GOODPASS}x"); expect_err "испорченный пропуск → 401" "$c" 401 bad_pass
 c=$(call POST devices -H 'content-type: application/json' -d '{"appId":"id73822000001","country":"RU"}'); expect_err "городской номер → 400" "$c" 400 bad_id
 c=$(call GET me/avatar); expect_err "без пропуска → 401" "$c" 401 bad_pass
 

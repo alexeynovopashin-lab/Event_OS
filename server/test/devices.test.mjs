@@ -96,3 +96,13 @@ test("журнал после регистрации: deviceId есть, ном�
   assert.ok(line.includes(a.deviceId));
   assert.ok(!line.includes("7913") && !line.includes(a.pass.split(".")[1]));
 });
+
+test("пропуск в X-Core-Pass (дом ru) и в Authorization: Bearer (другие дома) — одно и то же", async () => {
+  const { core } = makeCore({ store: createMemoryStore() });
+  const a = parse(await reg(core));
+  const b = parse(await reg(core));
+  assert.equal((await core.handle(req("DELETE", "/v1/devices/me", { headers: { "X-Core-Pass": a.pass } }))).status, 204);
+  assert.equal((await core.handle(req("DELETE", "/v1/devices/me", { headers: { "X-Core-Pass": a.pass } }))).status, 401);
+  // X-Core-Pass главнее Authorization: шлюз Яндекса мог бы оставить там чужое
+  assert.equal((await core.handle(req("DELETE", "/v1/devices/me", { headers: { "X-Core-Pass": b.pass, authorization: "Bearer мусор" } }))).status, 204);
+});

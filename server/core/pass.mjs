@@ -15,7 +15,15 @@ export async function issue(salt) {
   return { deviceId, pass, passHash: await hmacHex(salt, "pass:" + pass) };
 }
 
+// Где лежит пропуск: заголовок X-Core-Pass (основной), иначе Authorization: Bearer.
+// Измерено 23.11: шлюз Yandex Cloud Functions считает любой Authorization: Bearer своим IAM-токеном
+// и отвечает 403, не пуская запрос в функцию. Поэтому в доме ru пропуск ходит только в X-Core-Pass;
+// Authorization оставлен для других домов (Cloudflare) и локального запуска.
+export const PASS_HEADER = "x-core-pass";
+
 export function bearer(headers) {
+  const own = headers[PASS_HEADER];
+  if (typeof own === "string" && own.trim()) return own.trim();
   const h = headers.authorization || "";
   const m = /^Bearer\s+(\S+)$/i.exec(h);
   return m ? m[1] : null;
