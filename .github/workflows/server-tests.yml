@@ -1,0 +1,33 @@
+name: server-tests
+
+# Тесты сервера ядра (server/): общий модуль на подложном хранилище, разбор JPEG, слой Яндекса.
+# Облако не трогается: ни ключей, ни сети, ни секретов.
+on:
+  push:
+    paths: ["server/**", ".github/workflows/server-tests.yml"]
+  pull_request:
+    paths: ["server/**", ".github/workflows/server-tests.yml"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Зависимости слоя Яндекса (нужны только тесту хранилища)
+        working-directory: server/yandex
+        run: npm ci --omit=dev --no-audit --no-fund
+      - name: Тесты
+        working-directory: server
+        run: npm test
+      - name: Архив для Яндекса собирается
+        working-directory: server/yandex
+        run: ./build.sh
+      - name: Скрипт проверки проходит на локальном запуске
+        working-directory: server
+        run: |
+          PASS_SALT=ci-only-salt-0123456789abcdef node dev.mjs 8800 > /tmp/dev.log 2>&1 &
+          sleep 2
+          ./yandex/check.sh http://127.0.0.1:8800

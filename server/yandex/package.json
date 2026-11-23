@@ -1,0 +1,9 @@
+{
+  "name": "eventos-core-yandex",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Слой Yandex Cloud Function: хранилище в YDB. Собирается скриптом build.sh вместе с ../core.",
+  "dependencies": {
+    "ydb-sdk": "5.11.1"
+  }
+}
