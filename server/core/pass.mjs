@@ -21,6 +21,13 @@ export function bearer(headers) {
   return m ? m[1] : null;
 }
 
+// deviceId из well-formed пропуска (или null). Нужен, чтобы отличить «пропуск испорчен» от «устройства уже нет».
+export function passDeviceId(headers) {
+  const pass = bearer(headers);
+  const m = pass && PASS_RE.exec(pass);
+  return m ? m[1] : null;
+}
+
 // Возвращает запись устройства или null.
 export async function authenticate(store, salt, headers) {
   const pass = bearer(headers);
